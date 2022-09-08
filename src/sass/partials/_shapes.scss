@@ -1,0 +1,25 @@
+/*Circles*/
+@mixin circle($size: 70px, $borderWidth: 1px, $borderColor: white) {
+  border: 1px solid $borderColor;
+  width: $size;
+  height: $size;
+  border-radius: $border-radius-circle;
+  display: flex;
+  border-width: $borderWidth;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  transition: .4s;
+}
+
+@mixin square($radius: $border-radius-primary, $color: white) {
+  display: flex;
+  flex-direction: column;
+  padding: 2em;
+  border-radius: $radius;
+  background-color: $color;
+  box-shadow: rgb(50 50 93 / 25%) 0px 13px 27px -5px,
+    rgb(0 0 0 / 30%) 0px 8px 16px -8px;
+  z-index: 100;
+}

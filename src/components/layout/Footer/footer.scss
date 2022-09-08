@@ -1,0 +1,75 @@
+@import "../../../sass/partials/variables";
+@import "../../../sass/partials/shapes";
+
+footer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 1.5em 1.5em 0 1.5em;
+}
+
+.footer__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  @media screen and (min-width: 992px) {
+    flex-direction: row-reverse;
+  }
+}
+
+.footer__content--links,
+.footer__content--contact {
+  display: flex;
+  flex-direction: column;
+  padding: 2em;
+  line-height: 2;
+
+  span {
+    font-weight: bold;
+    margin-bottom: 0.5em;
+  }
+
+  a {
+    text-decoration: none;
+    color: $color-dark;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.footer__content--logo {
+  padding: 2em;
+
+  p {
+    max-width: 306px;
+  }
+
+  img {
+    max-width: 150px;
+  }
+}
+
+.footer__content--social {
+  display: flex;
+  gap: 10px;
+}
+
+.footer__content__social--circle {
+  @include circle($borderColor: $color-grey, $size: 50px);
+  opacity: 0.8;
+  font-size: 1.5em;
+  color: $color-grey;
+
+  &:hover {
+    filter: brightness(0.3);
+    cursor: pointer;
+  }
+}
+
+.footer__copyright {
+  text-align: center;
+  font-size: 0.9rem;
+}

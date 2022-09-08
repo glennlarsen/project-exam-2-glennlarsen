@@ -1,0 +1,7 @@
+@import "../../../sass/partials/variables";
+
+.linebreak {
+    border-bottom: 2px solid $color-secondary;
+    width: 100%;
+    max-width: $max-width;
+  }

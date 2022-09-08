@@ -1,0 +1,33 @@
+/*General Button style*/
+@mixin button($borderColor: $color-dark, $color: $color-dark, $backgroundColor: white) {
+    font-family: $font-header;
+    border: 1px solid $borderColor;
+    color: $color;
+    border-radius: 12px;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 1em 0;
+    padding: 0.5em;
+    text-decoration: none;
+    width: 200px;
+    transition: 0.4s !important;
+    background-color: $backgroundColor;
+
+    &:hover, &.active {
+        background-color: $color-primary;
+        border-color: $color-primary;
+        color: white;
+    }
+
+    @media screen and (min-width: 830px) {
+            width: 150px;
+            padding: 0.4em;
+      }
+}
+
+.btn-navigation {
+    @include button();
+}
+
+
