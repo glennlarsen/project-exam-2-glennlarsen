@@ -1,0 +1,23 @@
+@import "../../sass/partials/variables";
+@import "../../sass/partials/shapes";
+
+.social-media___content {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .social-media___content--circle {
+    @include circle($borderColor: $color-grey, $size: 40px );
+    opacity: 0.8;
+    font-size: 1.5em;
+    color: $color-grey;
+
+    @media screen and (min-width: 830px) {
+      @include circle($borderColor: $color-grey, $size: 50px );
+    }
+  
+    &:hover {
+      filter: brightness(0.3);
+      cursor: pointer;
+    }
+  }

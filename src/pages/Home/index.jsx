@@ -1,4 +1,5 @@
 import React from "react";
+import Layout from "components/layout/Layout";
 import Head from "../../components/layout/Head";
 import Heading from "../../components/typography/Heading";
 import Paragraph from "../../components/typography/Paragraph";
@@ -17,7 +18,7 @@ function Home() {
   };
 
   return (
-    <>
+    <Layout>
       <Head
         page="Home"
         description="Holidaze - Find your perfect Hotel in Bergen"
@@ -48,7 +49,7 @@ function Home() {
           </div>
           </main>
       </OuterContainer>
-    </>
+    </Layout>
   );
 }
 

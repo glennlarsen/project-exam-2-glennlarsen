@@ -3,9 +3,10 @@ import { useState } from "react";
 import "./searchbox.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
-import { BASE_URL, ESTABLISHMENTS } from "../../utils/api";
+import { BASE_URL, ESTABLISHMENTS, POPULATE_ALL } from "../../utils/api";
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
 import useApi from "../../utils/useApi";
+import { Link } from "react-router-dom";
 
 function Searchbox({ maxWidth, width, dropdownStatus }) {
   const Style = {
@@ -30,20 +31,20 @@ function Searchbox({ maxWidth, width, dropdownStatus }) {
       <span className="searchbox__category--title">View By Catgeory</span>
       <div className="searchbox__circles">
         <div className="searchbox__circles--small">
-          <a href="/accommodation" className="searchbox__circle">
+          <Link to="/accommodation" className="searchbox__circle">
             Hotel
-          </a>
-          <a href="/accommodation" className="searchbox__circle">
+          </Link>
+          <Link to="/accommodation" className="searchbox__circle">
             B&B
-          </a>
-          <a href="/accommodation" className="searchbox__circle">
+          </Link>
+          <Link to="/accommodation" className="searchbox__circle">
             <span>Guest</span>
             <span>house</span>
-          </a>
+          </Link>
         </div>
-        <a href="/accommodation" className="searchbox__circle--filled">
+        <Link to="/accommodation" className="searchbox__circle--filled">
           View All
-        </a>
+        </Link>
       </div>
     </>
   );
@@ -59,7 +60,7 @@ function Searchbox({ maxWidth, width, dropdownStatus }) {
     )
   );
 
-  const url = BASE_URL + ESTABLISHMENTS;
+  const url = BASE_URL + ESTABLISHMENTS + POPULATE_ALL;
   const { establishments, loading, error } = useApi(url);
 
   console.log(establishments);
@@ -79,7 +80,7 @@ function Searchbox({ maxWidth, width, dropdownStatus }) {
 
   const handleOnSelect = (item) => {
     // the item selected
-    console.log(item);
+    window.location.href = `details/${item.id}`;
   };
 
   const handleOnFocus = () => {
@@ -87,18 +88,27 @@ function Searchbox({ maxWidth, width, dropdownStatus }) {
   };
 
   const formatResult = (item) => {
+    const { title, address } = item.attributes;
+    const  image  = item.attributes.images.data[0].attributes.formats.thumbnail.url;
+    console.log(image)
     return (
-      <>
-        <div className="searchbox__results">
-          <span className="searchbox__results--title">{item.attributes.title}</span> 
-          <span className="searchbox__results--type">{item.attributes.address}</span>
+      <Link key={item.id} to={`details/${item.id}`}>
+        <div className="searchbox__results__container" >
+          <div className="searchbox__results">
+          <span className="searchbox__results--title">{title}</span> 
+          <span className="searchbox__results--address">{address}</span>
+          </div>
+          <div className="searchbox__results--image">
+            <img src={image} alt={title} />
+          </div>
         </div>
-      </>
+        </Link>
     );
   };
 
   const styling = {
     zIndex: "100",
+    borderRadius: "12px",
   };
 
   return (
@@ -114,7 +124,7 @@ function Searchbox({ maxWidth, width, dropdownStatus }) {
           onSelect={handleOnSelect}
           onFocus={handleOnFocus}
           formatResult={formatResult}
-          placeholder="Search for a hotel..."
+          placeholder="Search by name or address..."
           maxResults={5}
           autoFocus
           styling={styling}

@@ -5,18 +5,16 @@ import Contact from "./pages/Contact";
 import Accommodation from "./pages/Accommodation";
 import Login from "./pages/Login";
 import Details from "pages/Details";
-import Navigation from "./components/layout/Navigation";
-import Footer from "./components/layout/Footer";
+import ScrollToTop from "components/layout/ScrollToTop";
 
 function App() {
   return (
     <Router>
-      <div className="wrapper">
-        <Navigation />
+      <ScrollToTop>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/accommodation" element={<Accommodation />} />
-          {["/details/:id"].map((path, index) => {
+          {["/details/:id", "/accommodation/details/:id"].map((path, index) => {
             return ( <Route path={path} element={<Details />} key={index} />
               );
           })}
@@ -31,8 +29,7 @@ function App() {
             }
           />
         </Routes>
-      </div>
-      <Footer />
+        </ScrollToTop>
     </Router>
   );
 }

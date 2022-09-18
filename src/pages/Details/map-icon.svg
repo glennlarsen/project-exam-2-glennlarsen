@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="62" height="62" viewBox="0 0 62 62">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #3474d4;
+      }
+
+      .cls-2 {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <g id="Group_109" data-name="Group 109" transform="translate(-935.133 -2231.133)">
+    <circle id="Ellipse_6" data-name="Ellipse 6" class="cls-1" cx="31" cy="31" r="31" transform="translate(935.133 2231.133)"/>
+    <path id="bed-solid" class="cls-2" d="M1.736,32a1.737,1.737,0,0,1,1.736,1.736v13.89H15.627V38.945a1.734,1.734,0,0,1,1.736-1.736H29.517a5.179,5.179,0,0,1,5.209,5.209V54.572a1.736,1.736,0,0,1-3.473,0V52.836H3.473v1.736a1.736,1.736,0,0,1-3.473,0V33.736A1.737,1.737,0,0,1,1.736,32Zm3.473,9.55A4.341,4.341,0,1,1,9.55,45.89,4.34,4.34,0,0,1,5.209,41.55Z" transform="translate(948.77 2217.978)"/>
+  </g>
+</svg>

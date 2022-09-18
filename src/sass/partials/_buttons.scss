@@ -8,11 +8,27 @@
     font-size: 1.2rem;
     font-weight: bold;
     margin: 1em 0;
-    padding: 0.5em;
+    padding: .7em;
     text-decoration: none;
-    width: 200px;
     transition: 0.4s !important;
     background-color: $backgroundColor;
+    cursor: pointer;
+    width: 100%;
+}
+
+.btn {
+    @include button($backgroundColor: $color-primary, $borderColor: transparent, $color: white);
+    margin-top: 1em !important;
+    box-shadow: 2px 5px 13px rgba(23, 57, 109, 0.47);
+
+    &:hover {
+        background-color: $color-secondary;
+    }
+}
+
+.btn-navigation {
+    @include button();
+    width: 200px;
 
     &:hover, &.active {
         background-color: $color-primary;
@@ -26,8 +42,28 @@
       }
 }
 
-.btn-navigation {
-    @include button();
+.btn-floating {
+    @include button($backgroundColor: $color-primary, $borderColor: transparent, $color: white);
+    margin: 0 !important;
+    box-shadow: 2px 5px 13px rgba(23, 57, 109, 0.47);
+    padding: .5em;
+
+    &:hover {
+        background-color: $color-secondary;
+    }
 }
+
+.btn-form {
+    @media screen and (min-width: 830px) {
+        width: 50%;
+        margin: 0 auto;
+  }
+}
+
+.btn-login {
+    width: 100%;
+}
+
+
 
 

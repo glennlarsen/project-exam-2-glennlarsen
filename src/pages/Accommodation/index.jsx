@@ -1,5 +1,6 @@
 import React from "react";
 import "./accommodation.scss";
+import Layout from "components/layout/Layout";
 import OuterContainer from "../../components/layout/OuterContainer";
 import Head from "../../components/layout/Head";
 import Searchbox from "../../components/Searchbox";
@@ -18,7 +19,7 @@ function Accommodation() {
   };
 
   return (
-    <>
+    <Layout>
         <Head
           page="Accommodation"
           description="Holidaze - Search for accommodations in Bergen city center and sourrounding areas"
@@ -35,7 +36,7 @@ function Accommodation() {
           <Listings numberOfCards={20} />
           </main>
         </OuterContainer>
-    </>
+    </Layout>
   );
 }
 

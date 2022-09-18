@@ -26,6 +26,15 @@
   padding: 2em;
   max-width: 1280px;
   margin: 0 auto;
+  color: white;
+
+  address {
+    font-size: 1.1rem;
+  }
+
+  address:last-of-type {
+    margin-bottom: 1em;
+  }
 }
 
 .header__icon {

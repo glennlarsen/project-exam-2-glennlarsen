@@ -5,7 +5,8 @@ import { faStar } from "@fortawesome/free-solid-svg-icons";
 import tripadvisor from "./tripadvisor-blue-logo.png";
 import { Link } from "react-router-dom";
 
-function Card({ establishments, numberOfCards }) {
+function Card({ establishments, numberOfCards, loading }) {
+
   return (
     <>
       {establishments
@@ -27,20 +28,20 @@ function Card({ establishments, numberOfCards }) {
                     <Heading level={3}>{title}</Heading>
                   </div>
                 </div>
-                <div className="card__details">
-                  <span>{price} NOK per day</span>
-                  <div>{numberOfStars}</div>
-                  <p>{address}</p>
-                  <div className="card__circle">
-                    <img src={tripadvisor} alt="tripadvisor Logo" />
-                    {rating.toFixed(1)}
-                  </div>
+              <div className="card__details">
+                <span>{price} NOK per day</span>
+                <div>{numberOfStars}</div>
+                <p>{address}</p>
+                <div className="card__circle">
+                  <img src={tripadvisor} alt="tripadvisor Logo" />
+                  {rating.toFixed(1)}
                 </div>
+              </div>
             </Link>
           );
         })}
     </>
-  );
+  )
 }
 
 export default Card;
