@@ -7,6 +7,7 @@ import { BASE_URL, ESTABLISHMENTS, POPULATE_ALL } from "../../utils/api";
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
 import useApi from "../../utils/useApi";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router";
 
 function Searchbox({ maxWidth, width, dropdownStatus }) {
   const Style = {
@@ -65,7 +66,7 @@ function Searchbox({ maxWidth, width, dropdownStatus }) {
 
   console.log(establishments);
 
-
+  const navigate = useNavigate();
 
   const handleOnSearch = (string, results) => {
     // onSearch will have as the first callback parameter
@@ -80,7 +81,7 @@ function Searchbox({ maxWidth, width, dropdownStatus }) {
 
   const handleOnSelect = (item) => {
     // the item selected
-    window.location.href = `details/${item.id}`;
+    navigate(`details/${item.id}`);
   };
 
   const handleOnFocus = () => {
