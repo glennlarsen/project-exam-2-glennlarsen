@@ -9,11 +9,12 @@
   .social-media___content--circle {
     @include circle($borderColor: $color-grey, $size: 40px );
     opacity: 0.8;
-    font-size: 1.5em;
+    font-size: 1.3em;
     color: $color-grey;
 
     @media screen and (min-width: 830px) {
       @include circle($borderColor: $color-grey, $size: 50px );
+      color: $color-grey;
     }
   
     &:hover {

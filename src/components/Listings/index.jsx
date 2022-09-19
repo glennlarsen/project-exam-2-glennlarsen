@@ -2,15 +2,16 @@ import React from "react";
 import "./listings.scss";
 import Card from "./Card";
 import { useMediaQuery } from "react-responsive";
-import { BASE_URL, ESTABLISHMENTS, POPULATE_ALL } from "../../utils/api";
-import useApi from "../../utils/useApi";
 import MyLoader from "../../components/layout/MyLoader";
-
 
 function Listings({
   numberOfCards,
   MobileAndDesktopNumberOfCards,
   tabletNumberOfCards,
+  establishments,
+  loading,
+  error,
+  type,
 }) {
   const Desktop = ({ children }) => {
     const isDesktop = useMediaQuery({ minWidth: 1211 });
@@ -27,9 +28,6 @@ function Listings({
     return isMobile ? children : null;
   };
 
-  const url = BASE_URL + ESTABLISHMENTS + POPULATE_ALL;
-  const { establishments, loading, error } = useApi(url);
-
   if(loading) {
     return <MyLoader />
   }
@@ -45,12 +43,14 @@ function Listings({
             establishments={establishments}
             numberOfCards={numberOfCards}
             loading={loading}
+            type={type}
           />
         <Mobile>
           <Card
             establishments={establishments}
             numberOfCards={MobileAndDesktopNumberOfCards}
             loading={loading}
+            type={type}
           />
         </Mobile>
         <Tablet>
@@ -58,6 +58,7 @@ function Listings({
             establishments={establishments}
             numberOfCards={tabletNumberOfCards}
             loading={loading}
+            type={type}
           />
         </Tablet>
         <Desktop>
@@ -65,6 +66,7 @@ function Listings({
             establishments={establishments}
             numberOfCards={MobileAndDesktopNumberOfCards}
             loading={loading}
+            type={type}
           />
         </Desktop>
       </div>

@@ -34,6 +34,8 @@ function Details() {
 
   const { id } = useParams();
 
+  console.log(id)
+
   if (!id) {
     navigate("/");
   }

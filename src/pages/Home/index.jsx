@@ -10,8 +10,13 @@ import Header from "../../components/layout/Header";
 import tripadvisor from "./tripadvisor-logo.png";
 import Searchbox from "../../components/Searchbox";
 import Listings from "../../components/Listings";
+import { BASE_URL, ESTABLISHMENTS, POPULATE_ALL } from "utils/api";
+import useApi from "utils/useApi";
 
 function Home() {
+  const url = BASE_URL + ESTABLISHMENTS + POPULATE_ALL;
+  const { establishments, loading, error } = useApi(url);
+
   const TabletAndDesktop = ({ children }) => {
     const isTablet = useMediaQuery({ minWidth: 830 });
     return isTablet ? children : null;
@@ -40,12 +45,12 @@ function Home() {
             <span className="hader__icon--text">Tripadvisor</span>
             </div>
           </div>
-          <Searchbox />
+          <Searchbox establishments={establishments} />
           </Header>
           <main className="main-home">
           <Heading level={2}>Popular Hotels</Heading>
           <div className='popular'>
-          <Listings MobileAndDesktopNumberOfCards={3} tabletNumberOfCards={2} />
+          <Listings establishments={establishments} loading={loading} error={error} MobileAndDesktopNumberOfCards={3} tabletNumberOfCards={2} />
           </div>
           </main>
       </OuterContainer>

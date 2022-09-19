@@ -11,6 +11,7 @@ import Button from "components/forms/Button";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import InputsTheme from "components/forms/InputsTheme";
+import SendRoundedIcon from '@mui/icons-material/SendRounded';
 
 const boxStyle = {
   display: "flex",
@@ -49,11 +50,11 @@ function Contact() {
               Contact Us
             </Heading>
             <address>+47 91771028</address>
-            <address>support@holidaze.com</address>
+            <a href="mailto:support@holidaze.com?subject=Contact Holidaze">support@holidaze.com</a>
             <SocialMedia size={40} borderColor={"#17396D"} color={"#17396D"} />
           </div>
           <Box sx={boxStyle} component="form">
-          <Heading level={2}>Send us a message</Heading>
+          <Heading level={2}>Send us a message <SendRoundedIcon sx={{ color: "#17396D", verticalAlign: "top", rotate: "-22deg", marginLeft: "0.3em" }} /></Heading>
           <InputsTheme>
               <TextField label={"Name"} variant={"outlined"} />
               <TextField label={"Email"} variant={"outlined"} type="email" />

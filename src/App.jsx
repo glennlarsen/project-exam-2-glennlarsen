@@ -14,9 +14,23 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/accommodation" element={<Accommodation />} />
-          {["/details/:id", "/accommodation/details/:id"].map((path, index) => {
-            return ( <Route path={path} element={<Details />} key={index} />
-              );
+          {[
+            "/accommodation",
+            "/accommodation/:type",
+          ].map((path, index) => {
+            return (
+              <Route path={path} element={<Accommodation />} key={index} />
+            );
+          })}
+          {[
+            "/details/:id",
+            "/accommodation/details/:id",
+            "/accommodation/hotel/details/:id",
+            "/accommodation/b&b/details/:id",
+            "/accommodation/guesthouse/details/:id",
+            "/accommodation/viewAll/details/:id",
+          ].map((path, index) => {
+            return <Route path={path} element={<Details />} key={index} />;
           })}
           <Route path="/contact" element={<Contact />} />
           <Route path="/login" element={<Login />} />
@@ -29,7 +43,7 @@ function App() {
             }
           />
         </Routes>
-        </ScrollToTop>
+      </ScrollToTop>
     </Router>
   );
 }
