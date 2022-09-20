@@ -36,6 +36,10 @@ function Listings({
     return <div>An error occured</div>;
   }
 
+  if(!establishments) {
+    return <div style={{height: "130px", marginTop: "13em"}}>No listings available</div>
+  }
+
   return (
     <div className="background-box">
       <div className="listings-grid">

@@ -14,10 +14,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/accommodation" element={<Accommodation />} />
-          {[
-            "/accommodation",
-            "/accommodation/:type",
-          ].map((path, index) => {
+          {["/accommodation", "/accommodation/:type"].map((path, index) => {
             return (
               <Route path={path} element={<Accommodation />} key={index} />
             );
@@ -28,7 +25,6 @@ function App() {
             "/accommodation/hotel/details/:id",
             "/accommodation/b&b/details/:id",
             "/accommodation/guesthouse/details/:id",
-            "/accommodation/viewAll/details/:id",
           ].map((path, index) => {
             return <Route path={path} element={<Details />} key={index} />;
           })}

@@ -84,20 +84,21 @@
   border-color: $color-secondary;
   color: $color-secondary;
 
-  &:hover {
+  &:hover, &--active {
     background-color: $color-primary;
     border-color: $color-primary;
     color: white;
   }
 }
 
-.searchbox__circle--filled {
-  @include circle($size: 110px);
-  color: white;
-  background-color: $color-primary;
+.searchbox__circle--big {
+  @extend .searchbox__circle;
+  width: 110px;
+  height: 110px;
 
   &:hover {
     background-color: $color-secondary;
+    border-color: $color-secondary;
   }
 }
 

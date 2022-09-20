@@ -7,12 +7,16 @@ import { Link } from "react-router-dom";
 
 function Card({ establishments, numberOfCards, loading, type }) {
   const category = type;
+  const accommodations = establishments;
+    const filteredEstablishments = accommodations.filter((item) => item.attributes.type.toLowerCase().includes(category))
+
+    if (category && filteredEstablishments.length === 0) {
+      return <div style={{height: "130px", marginTop: "13em"}}>No listings in this category available</div>
+    }
 
   return (
     <>
-      {(category ? establishments
-        .filter((item) => item.attributes.type.toLowerCase().includes(category))
-        : establishments)
+      {(category ? filteredEstablishments : accommodations)
         .filter((item, idx) => idx < numberOfCards)
         .map((item) => {
           const { title, price, address, stars, rating } = item.attributes;
@@ -23,6 +27,7 @@ function Card({ establishments, numberOfCards, loading, type }) {
               <FontAwesomeIcon key={numberOfStars} icon={faStar} />
             );
           }
+
           return (
             <Link key={item.id} to={`details/${item.id}`} className="card">
               <div className="card__image">

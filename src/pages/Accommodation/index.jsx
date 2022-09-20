@@ -8,7 +8,6 @@ import { useMediaQuery } from "react-responsive";
 import Listings from "../../components/Listings";
 import { BASE_URL, ESTABLISHMENTS, POPULATE_ALL } from "utils/api";
 import useApi from "utils/useApi";
-import { FilterTypeProvider } from "../../utils/FilterTypeContext";
 import { useParams } from "react-router-dom";
 
 function Accommodation() {
@@ -25,33 +24,37 @@ function Accommodation() {
     return isTablet ? children : null;
   };
 
-  console.log(establishments)
-
   const { type } = useParams();
 
-  console.log(type)
-
   return (
-    <FilterTypeProvider>
     <Layout>
-        <Head
-          page="Accommodation"
-          description="Holidaze - Search for accommodations in Bergen city center and sourrounding areas"
-        />
-        <OuterContainer>
-          <main>
+      <Head
+        page="Accommodation"
+        description="Holidaze - Search for accommodations in Bergen city center and sourrounding areas"
+      />
+      <OuterContainer>
+        <main>
           <Mobile>
-          <Searchbox dropdownStatus={true}  />
+            <Searchbox dropdownStatus={true} />
           </Mobile>
           <TabletAndDesktop>
-          <Searchbox establishments={establishments} maxWidth={"none"} width={100} />
+            <Searchbox
+              establishments={establishments}
+              maxWidth={"none"}
+              width={100}
+            />
           </TabletAndDesktop>
           <div className="accommodations"></div>
-          <Listings type={type} establishments={establishments} loading={loading} error={error} numberOfCards={20} />
-          </main>
-        </OuterContainer>
+          <Listings
+            type={type}
+            establishments={establishments}
+            loading={loading}
+            error={error}
+            numberOfCards={20}
+          />
+        </main>
+      </OuterContainer>
     </Layout>
-    </FilterTypeProvider>
   );
 }
 

@@ -1,9 +1,13 @@
 .main-contact {
-    margin-bottom: 30em;
+    margin-bottom: 33em;
 }
 
 h2 svg {
     @media screen and (min-width: 830px) {
         font-size: 2rem !important;
     }
+}
+
+.errors {
+    color: red;
 }
