@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import logo from "../../../logo/HoliDaze-small.png";
 import "./navigation.scss";
 
-function NavLinks() {
+function NavLinks({auth, logout}) {
   return (
     <div className="navbar">
       <NavLink to="/">
@@ -19,9 +19,18 @@ function NavLinks() {
       <NavLink to="/contact" className="nav__link">
         Contact
       </NavLink>
-      <NavLink to="/login" className="btn-navigation">
-        Login
-      </NavLink>
+      {auth ? (
+            <button className="btn-navigation" onClick={logout}>
+              Log out
+            </button>
+          ) : (
+            <NavLink
+              to="/login"
+              className="btn-navigation"
+            >
+              Login
+            </NavLink>
+          )}
       </div>
     </div>
   );

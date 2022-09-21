@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./contact.scss";
 import Layout from "components/layout/Layout";
 import OuterContainer from "../../components/layout/OuterContainer";
@@ -10,7 +10,6 @@ import SocialMedia from "components/SocialMedia";
 import ContactForm from "./ContactForm";
 
 function Contact() {
-
   return (
     <Layout>
       <Head
@@ -24,7 +23,9 @@ function Contact() {
               Contact Us
             </Heading>
             <address>+47 91771028</address>
-            <a href="mailto:support@holidaze.com?subject=Contact Holidaze">support@holidaze.com</a>
+            <a href="mailto:support@holidaze.com?subject=Contact Holidaze">
+              support@holidaze.com
+            </a>
             <SocialMedia size={40} borderColor={"#17396D"} color={"#17396D"} />
           </div>
           <ContactForm />

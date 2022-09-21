@@ -4,7 +4,7 @@ import { faStar } from "@fortawesome/free-solid-svg-icons";
 import Button from "components/forms/Button";
 
 
-const FloatingContact = ({ onClick }) => (
+const StickyBookButton = ({ onClick }) => (
 <div className="floating-contact">
     <div className="floating-contact__text">
         <span><span className="floating-contact__text--price">From 1992 NOK </span>per night</span>
@@ -19,4 +19,4 @@ const FloatingContact = ({ onClick }) => (
 </div>
 )
 
-export default FloatingContact;
+export default StickyBookButton;

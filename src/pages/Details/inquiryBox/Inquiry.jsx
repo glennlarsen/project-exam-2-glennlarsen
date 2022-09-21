@@ -3,14 +3,17 @@ import { Icon } from "@iconify/react";
 import DropDown from "components/forms/Dropdown";
 import Button from "components/forms/Button";
 import RangeDatePicker from "components/forms/RangeDatePicker";
-import FloatingContact from "./FloatingContact";
+import FloatingContact from "./StickyBookButton";
 import { HideOn } from "react-hide-on-scroll";
 import BookingModal from "./BookingModal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 
-const Inquiry = ({ price, tripLink, stars, rating, breakfast }) => {
-  const [value, setValue] = useState([null, null]);
+const Inquiry = ({ price, tripLink, stars, rating, breakfast, title }) => {
+  const todaysDate = new Date();
+  const tomorrowsDate = new Date(todaysDate);
+  tomorrowsDate.setDate(tomorrowsDate.getDate() +1)
+  const [value, setValue] = useState([todaysDate, tomorrowsDate]);
 
   const handleValue = (newValue) => {
     setValue(newValue);
@@ -80,6 +83,7 @@ const Inquiry = ({ price, tripLink, stars, rating, breakfast }) => {
           guests={guests}
           open={open}
           onClose={handleClose}
+          title={title}
         />
       </div>
     </div>

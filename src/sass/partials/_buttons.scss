@@ -39,6 +39,7 @@
     @media screen and (min-width: 830px) {
             width: 150px;
             padding: 0.4em;
+            height: 47px;
       }
 }
 
@@ -47,6 +48,7 @@
     margin: 0 !important;
     box-shadow: 2px 5px 13px rgba(23, 57, 109, 0.47);
     padding: .5em;
+    max-width: 40%;
 
     &:hover {
         background-color: $color-secondary;
@@ -58,10 +60,6 @@
         width: 50%;
         margin: 0 auto;
   }
-}
-
-.btn-login {
-    width: 100%;
 }
 
 

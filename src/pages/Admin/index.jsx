@@ -2,9 +2,8 @@ import React from "react";
 import Layout from "components/layout/Layout";
 import OuterContainer from "../../components/layout/OuterContainer";
 import Head from "../../components/layout/Head";
-import LoginForm from "./LoginForm";
 
-function Login() {
+function index() {
   return (
     <Layout>
       <Head
@@ -12,10 +11,10 @@ function Login() {
         description="Holidaze - Login to your admin dashboard"
       />
       <OuterContainer>
-        <LoginForm />
+        Admin section here...
       </OuterContainer>
     </Layout>
-  );
+  )
 }
 
-export default Login;
+export default index;

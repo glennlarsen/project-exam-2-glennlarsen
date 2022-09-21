@@ -12,8 +12,10 @@ import { LocalizationProvider } from "@mui/x-date-pickers-pro";
 import { AdapterMoment } from "@mui/x-date-pickers-pro/AdapterMoment";
 import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
 
-function RangeDatePicker({value, onChange}) {
-  
+
+const RangeDatePicker = ({ value, onChange }) => {
+
+  console.log(value)
 
   const theme = createTheme({
     shape: {
@@ -42,12 +44,16 @@ function RangeDatePicker({value, onChange}) {
           disablePast
           value={value}
           onChange={onChange}
-
+ 
           renderInput={(startProps, endProps) => (
             <ThemeProvider theme={theme}>
-              <TextField {...startProps} />
+              <TextField
+                {...startProps}
+              />
               <Box sx={{ mx: 2 }}></Box>
-              <TextField {...endProps} />
+              <TextField
+                {...endProps}
+              />
             </ThemeProvider>
           )}
         />

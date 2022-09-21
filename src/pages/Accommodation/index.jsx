@@ -4,26 +4,11 @@ import Layout from "components/layout/Layout";
 import OuterContainer from "../../components/layout/OuterContainer";
 import Head from "../../components/layout/Head";
 import Searchbox from "../../components/Searchbox";
-import { useMediaQuery } from "react-responsive";
+import { Mobile, TabletAndDesktop } from "components/layout/ScreenViewSize";
 import Listings from "../../components/Listings";
-import { BASE_URL, ESTABLISHMENTS, POPULATE_ALL } from "utils/api";
-import useApi from "utils/useApi";
 import { useParams } from "react-router-dom";
 
-function Accommodation() {
-  const url = BASE_URL + ESTABLISHMENTS + POPULATE_ALL;
-  const { establishments, loading, error } = useApi(url);
-
-  const Mobile = ({ children }) => {
-    const isMobile = useMediaQuery({ maxWidth: 829 });
-    return isMobile ? children : null;
-  };
-
-  const TabletAndDesktop = ({ children }) => {
-    const isTablet = useMediaQuery({ minWidth: 830 });
-    return isTablet ? children : null;
-  };
-
+function Accommodation({establishments, loading, error}) {
   const { type } = useParams();
 
   return (

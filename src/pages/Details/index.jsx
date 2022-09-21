@@ -2,33 +2,22 @@ import "./details.scss";
 import React from "react";
 import Layout from "components/layout/Layout";
 import Head from "components/layout/Head";
-import { useMediaQuery } from "react-responsive";
+import { Mobile, TabletAndDesktop } from "components/layout/ScreenViewSize";
 import OuterContainer from "components/layout/OuterContainer";
 import DetailsHeader from "./DetailsHeader";
 import LineBreak from "components/layout/LineBreak";
 import Paragraph from "components/typography/Paragraph";
-import Facilities from "./Facilities";
-import Map from "./Map";
-import Inquiry from "./Inquiry";
+import Facilities from "./facilities/Facilities";
+import Map from "./map/Map";
+import Inquiry from "./inquiryBox/Inquiry";
 import ImageCarouselGallery from "./ImageCarouselGallery";
 import { useParams, useNavigate } from "react-router-dom";
 import useApi from "utils/useApi";
 import { BASE_URL, ESTABLISHMENTS, POPULATE_ALL } from "utils/api";
 import MyLoader from "../../components/layout/MyLoader";
 
-
-
 function Details() {
   const shareUrl = window.location.href;
-
-  const TabletAndDesktop = ({ children }) => {
-    const isTablet = useMediaQuery({ minWidth: 830 });
-    return isTablet ? children : null;
-  };
-  const Mobile = ({ children }) => {
-    const isMobile = useMediaQuery({ maxWidth: 829 });
-    return isMobile ? children : null;
-  };
 
   let navigate = useNavigate();
 
@@ -59,9 +48,6 @@ if (error) {
 const { title, price, address, stars, rating, tripadvisorlink, about, breakfast, facilitiess, images } = establishment.attributes;
 const facilities = facilitiess.data;
 const itemImages = images.data;
-
-console.log(itemImages)
-
 
   return (
     <Layout>
@@ -94,7 +80,7 @@ console.log(itemImages)
                 <Facilities facilities={facilities} heading={"Facilities"} />
               </div>
               <TabletAndDesktop>
-                <Inquiry breakfast={breakfast} rating={rating} stars={stars} price={price} tripLink={tripadvisorlink} />
+                <Inquiry title={title} breakfast={breakfast} rating={rating} stars={stars} price={price} tripLink={tripadvisorlink} />
               </TabletAndDesktop>
             </div>
             <LineBreak
@@ -109,7 +95,7 @@ console.log(itemImages)
             zoomLevel={16}
           />
           <Mobile>
-            <Inquiry breakfast={breakfast} rating={rating} stars={stars} price={price} tripLink={tripadvisorlink} />
+            <Inquiry title={title} breakfast={breakfast} rating={rating} stars={stars} price={price} tripLink={tripadvisorlink} />
           </Mobile>
         </main>
       </OuterContainer>

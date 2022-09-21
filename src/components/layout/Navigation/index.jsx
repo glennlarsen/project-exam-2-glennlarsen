@@ -1,33 +1,29 @@
 import "./navigation.scss";
 import { bubble as Menu } from "react-burger-menu";
-import { useMediaQuery } from "react-responsive";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import AuthContext from "utils/AuthContext";
+import { useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import logo from "../../../logo/HoliDaze-small.png";
 import NavLinks from "./NavLinks";
 import burger from "./bars-solid.svg";
 import Heading from "components/typography/Heading";
-
+import { TabletAndDesktop, Mobile } from "../ScreenViewSize";
 
 const Navigation = () => {
-  const Desktop = ({ children }) => {
-    const isDesktop = useMediaQuery({ minWidth: 992 });
-    return isDesktop ? children : null;
-  };
-  const TabletAndDesktop = ({ children }) => {
-    const isTablet = useMediaQuery({ minWidth: 830 });
-    return isTablet ? children : null;
-  };
-  const Mobile = ({ children }) => {
-    const isMobile = useMediaQuery({ maxWidth: 829 });
-    return isMobile ? children : null;
-  };
-
   const [menuState, setMenuState] = useState(false);
+  const [auth, setAuth] = useContext(AuthContext);
 
   const closeMenu = () => {
     setMenuState(false);
   };
+
+  const navigate = useNavigate();
+
+  function logout() {
+    setAuth(null);
+    navigate("/");
+  }
 
   return (
     <>
@@ -42,7 +38,9 @@ const Navigation = () => {
           isOpen={menuState}
           onStateChange={() => setMenuState()}
         >
-          <Heading level={1} color={"#17396D"}>Menu</Heading>
+          <Heading level={1} color={"#17396D"}>
+            Menu
+          </Heading>
           <NavLink to="/" onClick={() => closeMenu()} className="nav__link">
             Home
           </NavLink>
@@ -60,13 +58,23 @@ const Navigation = () => {
           >
             Contact
           </NavLink>
-          <NavLink to="/login" onClick={() => closeMenu()} className="btn-navigation">
-            Login
-          </NavLink>
+          {auth ? (
+            <button className="btn-navigation" onClick={logout}>
+              Log out
+            </button>
+          ) : (
+            <NavLink
+              to="/login"
+              onClick={() => closeMenu()}
+              className="btn-navigation"
+            >
+              Login
+            </NavLink>
+          )}
         </Menu>
       </Mobile>
       <TabletAndDesktop>
-        <NavLinks />
+        <NavLinks auth={auth} logout={logout} />
       </TabletAndDesktop>
     </>
   );

@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import FormControl from "@mui/material/FormControl";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import InputsTheme from "components/forms/InputsTheme";
 import SendRoundedIcon from "@mui/icons-material/SendRounded";
 import Heading from "components/typography/Heading";
-import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { EMAIL_REGEX } from "./validationRules";
+import InputAdornment from "@mui/material/InputAdornment";
+import ErrorRoundedIcon from "@mui/icons-material/ErrorRounded";
+import schema from "utils/schema";
 
 const boxStyle = {
   display: "flex",
@@ -17,27 +17,11 @@ const boxStyle = {
   width: "95%",
   bgcolor: "background.paper",
   borderRadius: "12px",
-  gap: 1,
+  gap: 2,
   boxShadow: 24,
   p: 4,
   margin: "0 auto",
 };
-
-const schema = yup.object().shape({
-  name: yup
-    .string()
-    .required("Please enter your first name")
-    .min(2, `First Name must be at least 2 characters`),
-  email: yup
-    .string()
-    .required("Please enter your email")
-    .matches(EMAIL_REGEX, "Enter a valid email"),
-  phone: yup.string().max(12, "Phone number is to long"),
-  message: yup
-    .string()
-    .required("Please enter your message")
-    .min(10, `Message must be at least 10 characters`),
-});
 
 function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
@@ -57,7 +41,12 @@ function ContactForm() {
   }
 
   return (
-    <Box sx={boxStyle} component="form" onSubmit={handleSubmit(onSubmit)} noValidate>
+    <Box
+      sx={boxStyle}
+      component="form"
+      onSubmit={handleSubmit(onSubmit)}
+      noValidate
+    >
       <Heading level={2}>
         Send us a message
         <SendRoundedIcon
@@ -77,9 +66,19 @@ function ContactForm() {
           type="text"
           {...register("name")}
           error={Boolean(errors.name)}
-          helperText={errors.name ? errors.name.message : " "}
+          helperText={errors.name ? errors.name.message : ""}
+          InputProps={
+            errors.name
+              ? {
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <ErrorRoundedIcon color="error" />
+                    </InputAdornment>
+                  ),
+                }
+              : ""
+          }
         />
-
         <TextField
           label={"Email"}
           id="email"
@@ -87,7 +86,18 @@ function ContactForm() {
           type="email"
           {...register("email")}
           error={Boolean(errors.email)}
-          helperText={errors.email ? errors.email.message : " "}
+          helperText={errors.email ? errors.email.message : ""}
+          InputProps={
+            errors.email
+              ? {
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <ErrorRoundedIcon color="error" />
+                    </InputAdornment>
+                  ),
+                }
+              : ""
+          }
         />
 
         <TextField
@@ -98,7 +108,18 @@ function ContactForm() {
           placeholder="Optional"
           {...register("phone")}
           error={Boolean(errors.phone)}
-          helperText={errors.phone ? errors.phone.message : " "}
+          helperText={errors.phone ? errors.phone.message : ""}
+          InputProps={
+            errors.phone
+              ? {
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <ErrorRoundedIcon color="error" />
+                    </InputAdornment>
+                  ),
+                }
+              : ""
+          }
         />
 
         <TextField
@@ -110,7 +131,18 @@ function ContactForm() {
           placeholder="Write your message here..."
           {...register("message")}
           error={Boolean(errors.message)}
-          helperText={errors.message ? errors.message.message : " "}
+          helperText={errors.message ? errors.message.message : ""}
+          InputProps={
+            errors.message
+              ? {
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <ErrorRoundedIcon color="error" />
+                    </InputAdornment>
+                  ),
+                }
+              : ""
+          }
         />
       </InputsTheme>
       <button type="submit" className="btn btn-form">

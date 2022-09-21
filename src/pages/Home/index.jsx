@@ -5,22 +5,13 @@ import Heading from "../../components/typography/Heading";
 import Paragraph from "../../components/typography/Paragraph";
 import background from "./background.jpg";
 import OuterContainer from "../../components/layout/OuterContainer";
-import { useMediaQuery } from "react-responsive";
+import { TabletAndDesktop } from "components/layout/ScreenViewSize";
 import Header from "../../components/layout/Header";
 import tripadvisor from "./tripadvisor-logo.png";
 import Searchbox from "../../components/Searchbox";
 import Listings from "../../components/Listings";
-import { BASE_URL, ESTABLISHMENTS, POPULATE_ALL } from "utils/api";
-import useApi from "utils/useApi";
 
-function Home() {
-  const url = BASE_URL + ESTABLISHMENTS + POPULATE_ALL;
-  const { establishments, loading, error } = useApi(url);
-
-  const TabletAndDesktop = ({ children }) => {
-    const isTablet = useMediaQuery({ minWidth: 830 });
-    return isTablet ? children : null;
-  };
+function Home({establishments, loading, error}) {
 
   return (
     <Layout>

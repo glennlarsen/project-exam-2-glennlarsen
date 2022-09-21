@@ -1,8 +1,8 @@
 import React from "react";
 import "./listings.scss";
 import Card from "./Card";
-import { useMediaQuery } from "react-responsive";
 import MyLoader from "../../components/layout/MyLoader";
+import { Mobile, Tablet, Desktop } from "../layout/ScreenViewSize";
 
 function Listings({
   numberOfCards,
@@ -13,20 +13,6 @@ function Listings({
   error,
   type,
 }) {
-  const Desktop = ({ children }) => {
-    const isDesktop = useMediaQuery({ minWidth: 1211 });
-    return isDesktop ? children : null;
-  };
-
-  const Tablet = ({ children }) => {
-    const isTablet = useMediaQuery({ minWidth: 781, maxWidth: 1210 });
-    return isTablet ? children : null;
-  };
-
-  const Mobile = ({ children }) => {
-    const isMobile = useMediaQuery({ maxWidth: 780 });
-    return isMobile ? children : null;
-  };
 
   if(loading) {
     return <MyLoader />

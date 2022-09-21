@@ -122,9 +122,15 @@
 }
 
 .pin-text {
+  opacity: 0;
   font-size: 1.3em;
   margin-left: 1em;
   font-weight: bold;
+  transition: .4s;
+}
+
+.pin:hover .pin-text {
+  opacity: 1;
 }
 
 @media screen and (min-width: 830px) {

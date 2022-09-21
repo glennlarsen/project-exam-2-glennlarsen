@@ -6,8 +6,6 @@ import { MAPS_KEY } from "utils/api";
 import Geocode from "react-geocode";
 import { GEOCODING_KEY } from "utils/api";
 
-import "./details.scss";
-
 const LocationPin = ({ text }) => (
   <div className="pin">
     <img src={mapIcon} className="pin-icon" />
