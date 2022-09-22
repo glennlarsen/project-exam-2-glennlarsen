@@ -12,6 +12,7 @@ import InputsTheme from "components/forms/InputsTheme";
 import { AUTH_URL } from "utils/api";
 import InputAdornment from "@mui/material/InputAdornment";
 import ErrorRoundedIcon from "@mui/icons-material/ErrorRounded";
+import FormError from "components/forms/FormError";
 
 const boxStyle = {
   display: "flex",
@@ -74,6 +75,7 @@ const LoginForm = () => {
     <Box sx={boxStyle} component="form" onSubmit={handleSubmit(onSubmit)}>
       <Heading level={1}>Login</Heading>
       <InputsTheme>
+      {loginError && <FormError>{loginError}</FormError>}
         <TextField
           fullWidth
           label={"Username"}

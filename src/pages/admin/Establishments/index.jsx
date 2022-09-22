@@ -5,27 +5,10 @@ import Head from "components/layout/Head";
 import Heading from "components/typography/Heading";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 import "./establishments.scss";
-import { NavLink } from "react-router-dom";
-import Tooltip from "@mui/material/Tooltip";
 import MyLoader from "components/layout/MyLoader";
-
-const theme = createTheme({
-  palette: {
-    primary: {
-      // Purple and green play nicely together.
-      main: "#17396D",
-    },
-    secondary: {
-      // This is green.A700 as hex.
-      main: "#3474D4",
-    },
-  },
-  components: {},
-});
+import AdminHeader from "components/admin/AdminHeader";
 
 function Establishments({ establishments, loading, error }) {
   if (loading) {
@@ -51,17 +34,7 @@ function Establishments({ establishments, loading, error }) {
         description="Holidaze Admin - View of your current establishments"
       />
       <OuterContainer>
-        <ThemeProvider theme={theme}>
-          <div className="admin-header">
-            <Heading level={1}>Establishments</Heading>
-            <Tooltip title="Add new">
-              <NavLink to="/addestablishment">
-                <Fab color="primary" aria-label="add">
-                  <AddIcon />
-                </Fab>
-              </NavLink>
-            </Tooltip>
-          </div>
+          <AdminHeader heading="Establishments" icon={<AddIcon />} iconToolTip="Add New" iconLink="/addestablishment" />
           <Box
             className="admin-grid"
             sx={{ flexGrow: 1, position: "relative" }}
@@ -102,7 +75,6 @@ function Establishments({ establishments, loading, error }) {
               })}
             </Grid>
           </Box>
-        </ThemeProvider>
       </OuterContainer>
     </Layout>
   );

@@ -3,6 +3,8 @@ import Layout from "components/layout/Layout";
 import OuterContainer from "components/layout/OuterContainer";
 import Head from "components/layout/Head";
 import Heading from "components/typography/Heading";
+import AdminHeader from 'components/admin/AdminHeader';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 
 function index() {
@@ -13,7 +15,7 @@ function index() {
         description="Holidaze Admin - Received Enquiries from your establishments"
       />
       <OuterContainer>
-        <Heading level={1}>Add New Establishment</Heading>
+        <AdminHeader heading="Add New Establishment" icon={<ArrowBackIcon />} iconToolTip="Go Back" iconLink="/establishments" />
       </OuterContainer>
     </Layout>
   )

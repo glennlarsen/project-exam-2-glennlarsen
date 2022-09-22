@@ -3,7 +3,6 @@ import { NavLink } from "react-router-dom";
 import logo from "../../../logo/HoliDaze-small.png";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import Paper from '@mui/material/Paper';
 import "./navigation.scss";
 
 function NavLinksDesktop({ auth, logout }) {
@@ -15,6 +14,7 @@ function NavLinksDesktop({ auth, logout }) {
   const handleClose = () => {
     setAnchorEl(null);
   };
+  
 
   return (
     <div className="navbar">
