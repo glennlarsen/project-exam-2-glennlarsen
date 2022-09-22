@@ -1,124 +1,183 @@
-@import "../../../sass/partials/variables"; 
+@import "../../../sass/partials/variables";
 
 /* Position and sizing of burger button */
 .bm-burger-button {
-    position: absolute;
-    width: 33px;
-    height: 30px;
-    right: 30px;
-    top: 35px;
-  }
-  
-  /* Color/shape of burger icon bars */
-  .bm-burger-bars {
-    background: $color-dark;
-  }
-  
-  /* Color/shape of burger icon bars on hover*/
-  .bm-burger-bars-hover {
-    background: $color-primary;
-    opacity: 1 !important;
-  }
-  
-  /*
+  position: absolute;
+  width: 33px;
+  height: 30px;
+  right: 30px;
+  top: 35px;
+}
+
+/* Color/shape of burger icon bars */
+.bm-burger-bars {
+  background: $color-dark;
+}
+
+/* Color/shape of burger icon bars on hover*/
+.bm-burger-bars-hover {
+  background: $color-primary;
+  opacity: 1 !important;
+}
+
+/*
   Sidebar wrapper styles
   Note: Beware of modifying this element as it can break the animations - you should not need to touch it in most cases
   */
-  .bm-menu-wrap {
-    top: 0px;
+.bm-menu-wrap {
+  top: 0px;
+}
+
+/* General sidebar styles */
+.bm-menu {
+  background: white;
+  padding: 1em 1.5em 0;
+  font-size: 1.5rem;
+}
+
+/* Styling of overlay */
+.bm-overlay {
+  background: rgba(0, 0, 0, 0.3);
+  top: 0px;
+}
+
+/* Morph shape necessary with bubble or elastic */
+.bm-morph-shape {
+  fill: white;
+}
+
+/* Position and sizing of clickable cross button */
+.bm-cross-button {
+  height: 35px !important;
+  width: 35px !important;
+  right: 20px !important;
+  top: 20px !important;
+}
+
+/* Color/shape of close button cross */
+.bm-cross {
+  background: $color-dark;
+
+  &:hover {
+    background: $color-primary;
   }
-  
-  /* General sidebar styles */
-  .bm-menu {
-    background: white;
-    padding: 1em 1.5em 0;
-    font-size: 1.5rem;
+}
+
+/* Wrapper for item list */
+.bm-item-list {
+  padding: 0.5em;
+  display: flex;
+  flex-direction: column;
+
+  a:not(:last-child) {
+    padding-top: 1em;
+    margin-bottom: 1em;
   }
-  
-  /* Styling of overlay */
-  .bm-overlay {
-    background: rgba(0, 0, 0, 0.3);
-    top: 0px;
+}
+
+/*All nav links*/
+.nav__link {
+  font-family: $font-header;
+  font-weight: bold;
+  font-size: 1.1rem;
+  text-decoration: none;
+  border-bottom: 4px solid transparent;
+  transition: 0.4s !important;
+
+  &:hover,
+  &.active {
+    border-bottom: 4px solid $color-primary;
+    color: $color-primary;
   }
-  
-  /* Morph shape necessary with bubble or elastic */
-  .bm-morph-shape {
-    fill: white;
+}
+
+/*Logo in navbar*/
+.logo-navbar {
+  padding: 1.5em;
+  max-width: 215px;
+}
+
+/*Logo in sidebar menu*/
+.logo-menu {
+  padding: 1em 0;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.navbar__links {
+  display: flex;
+  align-items: center;
+  padding-right: 1.5em;
+  gap: 2em;
+
+  @media screen and (min-width: 992px) {
+    gap: 3.5em;
   }
-  
-  /* Position and sizing of clickable cross button */
-  .bm-cross-button {
-    height: 35px !important;
-    width: 35px !important;
-    right: 20px !important;
-    top: 20px !important;
-  }
-  
-  /* Color/shape of close button cross */
-  .bm-cross {
-    background: $color-dark;
-  
-    &:hover {
-      background: $color-primary;
-    }
-  }
-  
-  /* Wrapper for item list */
-  .bm-item-list {
-    padding: 0.5em;
+}
+
+//Admin//
+.admin-menu {
+  font-family: "Inter";
+  color: $color-dark;
+  margin-top: 1em;
+  font-size: 1rem;
+
+  &__dropdown {
     display: flex;
     flex-direction: column;
-  
-    a:not(:last-child) {
-      padding-top: 1em;
-      margin-bottom: 1em;
-    }
+    height: 0;
+    transition: height 0.3s ease-in-out;
+    overflow: hidden;
+    padding-left: 0.5em;
   }
-  
-  /*All nav links*/
-  .nav__link {
-    font-family: $font-header;
-    color: $color-dark;
+
+  &__dropdown--active {
+    height: 100%;
+  }
+
+  &__toogle {
     font-weight: bold;
     font-size: 1.1rem;
-    text-decoration: none;
+    color: $color-primary;
+    background: transparent;
+    padding: 0;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    cursor: pointer;
+
+    &:hover {
+      color: $color-secondary;
+    }
+  }
+
+  a {
+    margin-bottom: 0 !important;
     border-bottom: 4px solid transparent;
     transition: 0.4s !important;
-  
-    &:hover, &.active {
+
+    &:hover,
+    &.active {
       border-bottom: 4px solid $color-primary;
       color: $color-primary;
     }
   }
-  
-  /*Logo in navbar*/
-  .logo-navbar {
-    padding: 1.5em;
-    max-width: 215px;
-  }
-  
-  /*Logo in sidebar menu*/
-  .logo-menu {
-    padding: 1em 0;
-  }
-  
-  .navbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    max-width: 1400px;
-    margin: 0 auto;
-  }
-  
-  .navbar__links {
-    display: flex;
-    align-items: center;
-    padding-right: 1.5em;
-    gap: 2em;
 
-    @media screen and (min-width: 992px) {
-          gap: 3.5em;
-      }
+  &__username {
+    padding-top: 1.3em;
+    font-size: 0.8rem;
+    font-style: italic;
+
+    span {
+      font-weight: bold;
+    }
   }
-  
-  
+}

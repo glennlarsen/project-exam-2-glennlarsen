@@ -1,5 +1,5 @@
-@import "../../sass//partials/shapes";
-@import "../../sass//partials/variables";
+@import "../../sass/partials/shapes";
+@import "../../sass/partials/variables";
 
 .searchbox {
   @include square();
@@ -107,9 +107,10 @@
   left: 50%;
   transition: 0.4s;
   color: $color-secondary;
+  cursor: pointer;
 }
 
-.fa-chevron-down {
+.searchbox .fa-chevron-down {
   @extend .arrow-icons;
   bottom: 0;
   transform: translate(-50%, 50%);
@@ -119,7 +120,7 @@
   }
 }
 
-.fa-chevron-up {
+.searchbox .fa-chevron-up {
   @extend .arrow-icons;
   bottom: -28px;
   transform: translate(-50%, 70%);

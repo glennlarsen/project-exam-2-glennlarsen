@@ -5,10 +5,11 @@ import AuthContext from "utils/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import logo from "../../../logo/HoliDaze-small.png";
-import NavLinks from "./NavLinks";
+import NavLinksDesktop from "./NavLinksDesktop";
 import burger from "./bars-solid.svg";
 import Heading from "components/typography/Heading";
 import { TabletAndDesktop, Mobile } from "../ScreenViewSize";
+import AdminMenu from "./AdminMenu";
 
 const Navigation = () => {
   const [menuState, setMenuState] = useState(false);
@@ -36,7 +37,6 @@ const Navigation = () => {
           right
           customBurgerIcon={<img src={burger} />}
           isOpen={menuState}
-          onStateChange={() => setMenuState()}
         >
           <Heading level={1} color={"#17396D"}>
             Menu
@@ -59,9 +59,7 @@ const Navigation = () => {
             Contact
           </NavLink>
           {auth ? (
-            <button className="btn-navigation" onClick={logout}>
-              Log out
-            </button>
+            <AdminMenu auth={auth} logout={logout} />
           ) : (
             <NavLink
               to="/login"
@@ -74,7 +72,7 @@ const Navigation = () => {
         </Menu>
       </Mobile>
       <TabletAndDesktop>
-        <NavLinks auth={auth} logout={logout} />
+        <NavLinksDesktop auth={auth} logout={logout} />
       </TabletAndDesktop>
     </>
   );

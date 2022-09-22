@@ -43,6 +43,10 @@
       }
 }
 
+.btn-logout {
+    margin-top: .3em;
+}
+
 .btn-floating {
     @include button($backgroundColor: $color-primary, $borderColor: transparent, $color: white);
     margin: 0 !important;

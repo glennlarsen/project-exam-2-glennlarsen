@@ -5,7 +5,10 @@ import Contact from "./pages/Contact";
 import Accommodation from "./pages/Accommodation";
 import Login from "./pages/Login";
 import Details from "pages/Details";
-import Admin from "pages/Admin";
+import AddEstablishment from "pages/admin/AddEstablishment";
+import Establishments from "pages/admin/Establishments";
+import Messages from "pages/admin/Messages";
+import Enquiries from "pages/admin/Enquiries";
 import ScrollToTop from "components/layout/ScrollToTop";
 import { BASE_URL, ESTABLISHMENTS, POPULATE_ALL } from "utils/api";
 import useApi from "utils/useApi";
@@ -44,9 +47,13 @@ function App() {
               return (
                 <Route
                   path={path}
-                  element={<Accommodation establishments={establishments} />}
-                  loading={loading}
-                  error={error}
+                  element={
+                    <Accommodation
+                      establishments={establishments}
+                      loading={loading}
+                      error={error}
+                    />
+                  }
                   key={index}
                 />
               );
@@ -62,7 +69,19 @@ function App() {
             })}
             <Route path="/contact" element={<Contact />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/admin" element={<Admin />} />
+            <Route
+              path="/establishments"
+              element={
+                <Establishments
+                  establishments={establishments}
+                  loading={loading}
+                  error={error}
+                />
+              }
+            />
+            <Route path="/addestablishment" element={<AddEstablishment />} />
+            <Route path="/messages" element={<Messages />} />
+            <Route path="/enquiries" element={<Enquiries />} />
             <Route
               path="*"
               element={

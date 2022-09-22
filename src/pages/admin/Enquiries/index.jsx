@@ -2,20 +2,20 @@ import React from "react";
 import Layout from "components/layout/Layout";
 import OuterContainer from "components/layout/OuterContainer";
 import Head from "components/layout/Head";
-import LoginForm from "./LoginForm";
+import Heading from "components/typography/Heading";
 
-function Login() {
+function Enquiries() {
   return (
     <Layout>
       <Head
-        page="Login"
-        description="Holidaze - Login to your admin dashboard"
+        page="Admin - Enquiries"
+        description="Holidaze Admin - Received Enquiries from your establishments"
       />
       <OuterContainer>
-        <LoginForm />
+        <Heading level={1}>Enquiries</Heading>
       </OuterContainer>
     </Layout>
   );
 }
 
-export default Login;
+export default Enquiries;

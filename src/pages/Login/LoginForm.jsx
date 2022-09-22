@@ -61,7 +61,7 @@ const LoginForm = () => {
       const response = await axios.post(url, data);
       console.log(response)
       setAuth(response.data);
-      navigate("/admin");
+      navigate("/dashboard");
     } catch (error) {
       console.log("error", error);
       setLoginError("Wrong username or password");
