@@ -19,13 +19,13 @@ const theme = createTheme({
   components: {},
 });
 
-function AdminHeader({heading, icon, iconToolTip, iconLink}) {
+function AdminHeader({heading, icon, iconToolTip, iconLink, fixed}) {
   return (
     <ThemeProvider theme={theme}>
     <div className="admin-header">
       <Heading level={1}>{heading}</Heading>
       <Tooltip title={iconToolTip}>
-        <NavLink to={iconLink}>
+        <NavLink className={fixed} to={iconLink}>
           <Fab color="primary" aria-label="add">
             {icon}
           </Fab>

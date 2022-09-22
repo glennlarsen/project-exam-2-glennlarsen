@@ -34,7 +34,7 @@ function Establishments({ establishments, loading, error }) {
         description="Holidaze Admin - View of your current establishments"
       />
       <OuterContainer>
-          <AdminHeader heading="Establishments" icon={<AddIcon />} iconToolTip="Add New" iconLink="/addestablishment" />
+          <AdminHeader heading="Establishments" icon={<AddIcon />} iconToolTip="Add New" iconLink="/addestablishment" fixed={"fixed-button"} />
           <Box
             className="admin-grid"
             sx={{ flexGrow: 1, position: "relative" }}
