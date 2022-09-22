@@ -58,6 +58,7 @@
   }
 }
 
+//facilities
 .facilities {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(90px, 3fr));
@@ -93,6 +94,7 @@
   }
 }
 
+//map
 .map {
   height: 100%;
   width: 100%;
@@ -150,6 +152,7 @@
   }
 }
 
+//inquiriy box
 .inquiry__container {
   width: 100%;
   margin-bottom: 2em;
@@ -207,6 +210,7 @@
   }
 }
 
+//reviews tripadvisor
 .reviews {
   position: absolute;
   display: flex;
@@ -227,6 +231,7 @@
   }
 }
 
+//floating booking button
 .floating-contact {
   position: fixed;
   bottom: 0;
@@ -255,6 +260,7 @@
   }
 }
 
+//image gallery
 .image-gallery {
   width: 100%;
 

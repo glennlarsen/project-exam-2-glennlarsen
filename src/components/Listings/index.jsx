@@ -1,8 +1,8 @@
 import React from "react";
 import "./listings.scss";
 import Card from "./Card";
-import MyLoader from "../../components/layout/MyLoader";
-import { Mobile, Tablet, Desktop } from "../layout/ScreenViewSize";
+import MyLoader from "components/layout/MyLoader";
+import { Mobile, Tablet, Desktop } from "components/layout/ScreenViewSize";
 
 function Listings({
   numberOfCards,

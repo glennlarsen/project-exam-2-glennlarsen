@@ -6,6 +6,8 @@ footer {
   flex-direction: column;
   width: 100%;
   padding: 1.5em 1.5em 0 1.5em;
+  z-index: 200;
+  background: white;
 
   @media screen and (min-width: 830px) {
     padding: 1.5em 0 0 0;
