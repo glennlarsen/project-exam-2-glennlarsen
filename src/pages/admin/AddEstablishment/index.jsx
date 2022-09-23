@@ -14,15 +14,14 @@ import "./addestablishment.scss";
 import DropDown from "components/forms/Dropdown";
 import MenuItem from "@mui/material/MenuItem";
 import AddressAutoComplete from "./AddressAutoComplete";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar } from "@fortawesome/free-solid-svg-icons";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import Rating from "@mui/material/Rating";
-import Typography from "@mui/material/Typography";
+import FormGroup from "@mui/material/FormGroup";
+import AddFacilities from "./AddFacilities";
 
 const boxStyle = {
   display: "flex",
@@ -37,6 +36,7 @@ const boxStyle = {
   pt: 2,
   margin: "0 auto",
   mb: 4,
+  transition: "height 0.3s ease-in-out",
 };
 
 const AddEstablishment = () => {
@@ -47,7 +47,6 @@ const AddEstablishment = () => {
     event.preventDefault();
     setTypeValue(event.target.value);
   };
-
 
   return (
     <Layout>
@@ -125,35 +124,36 @@ const AddEstablishment = () => {
               </RadioGroup>
             </FormControl>
             <FormControl>
-            <FormLabel id="breakfast-row-radio-buttons-group-label">
+              <FormLabel id="breakfast-row-radio-buttons-group-label">
                 Star Rating
               </FormLabel>
-            <Rating
-              name="simple-controlled"
-              sx={{
-                "& .MuiRating-iconFilled": {
-                  color: "black",
-                },
-                "& .MuiRating-iconHover": {
-                  color: "black",
-                },
-              }}
-              defaultValue={1}
-              onChange={(event, newValue) => {
-                setStarValue(newValue);
-              }}
-            />
+              <Rating
+                size="large"
+                name="simple-controlled"
+                sx={{
+                  "& .MuiRating-iconFilled": {
+                    color: "black",
+                  },
+                  "& .MuiRating-iconHover": {
+                    color: "black",
+                  },
+                }}
+                defaultValue={1}
+                onChange={(event, newValue) => {
+                  setStarValue(newValue);
+                }}
+              />
             </FormControl>
-            <FormControl>
-            <Heading level={3}>TripAdvisor</Heading>
-            <TextField
-              label={"Tripadvisor Link"}
-              id="tripadvisorlink"
-              variant={"outlined"}
-              type="url"
-              placeholder="Https://..."
-            />
-            </FormControl>
+            <FormGroup>
+              <Heading level={3}>TripAdvisor</Heading>
+              <TextField
+                label={"Tripadvisor Link"}
+                id="tripadvisorlink"
+                variant={"outlined"}
+                type="url"
+                placeholder="Https://..."
+              />
+            </FormGroup>
             <TextField
               label={"Tripadvisor Rating"}
               id="tripadvisorrating"
@@ -161,7 +161,7 @@ const AddEstablishment = () => {
               type="number"
               placeholder="Ex. 4.3"
             />
-            <Heading level={2}>Facilities</Heading>
+            <AddFacilities />
           </InputsTheme>
         </Box>
       </OuterContainer>

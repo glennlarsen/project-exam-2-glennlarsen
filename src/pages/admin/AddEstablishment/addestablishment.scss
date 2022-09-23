@@ -1,14 +1,36 @@
 @import "../../../sass//partials/variables";
 
 .pac-container {
-    font-family: $font-primary;
-    border-radius: $border-radius-primary;
-   }
-   .pac-item,
-   .pac-item-query {
-    color: $color-dark;
-    padding: .7em;
-   }
-   .pac-item:hover {
-    background: $color-background;
-   }
+  font-family: $font-primary;
+  border-radius: $border-radius-primary;
+}
+.pac-item,
+.pac-item-query {
+  color: $color-dark;
+  padding: 0.7em;
+}
+.pac-item:hover {
+  background: $color-background;
+}
+
+.add__facilities {
+    display: flex;
+    flex-direction: column;
+  overflow: hidden;
+  flex-wrap: nowrap !important;
+  height: 330px;
+  transition: height 0.3s ease-in-out;
+  background: white;
+  position: relative;
+
+  & .svg-inline--fa {
+    position: absolute;
+    bottom: 0;
+    right: 50%;
+    cursor: pointer;
+  }
+}
+
+.add__facilities--show {
+  height: 100%;
+}
