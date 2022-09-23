@@ -15,7 +15,7 @@ const StickyBookButton = ({ onClick }) => (
           <FontAwesomeIcon icon={faStar} />
         </div>
     </div>
-    <Button onClick={onClick} type={"btn-floating"}>Book</Button>
+    <button onClick={onClick} className="btn-floating">Book</button>
 </div>
 )
 

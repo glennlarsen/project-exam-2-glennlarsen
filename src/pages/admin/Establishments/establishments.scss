@@ -5,11 +5,11 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 0.5em;
-  padding: 1.5em;
+  padding: 1em 1.5em;
   background: white;
   border-radius: $border-radius-primary;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  margin: 0 1.5em 1.5em 1.5em;
+  margin: 0 1em 1.5em 1em;
 
   @media screen and (min-width: 830px) {
     margin: 0 0 1.5em 0;
@@ -28,7 +28,7 @@
 }
 
 .admin-grid {
-  padding: 0 1.5em;
+  padding: 0 1em;
 
   @media screen and (min-width: 830px) {
     padding: 0;

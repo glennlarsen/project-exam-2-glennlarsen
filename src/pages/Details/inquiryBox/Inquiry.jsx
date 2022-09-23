@@ -8,22 +8,23 @@ import { HideOn } from "react-hide-on-scroll";
 import BookingModal from "./BookingModal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
+import MenuItem from "@mui/material/MenuItem";
 
 const Inquiry = ({ price, tripLink, stars, rating, breakfast, title }) => {
   const todaysDate = new Date();
   const tomorrowsDate = new Date(todaysDate);
-  tomorrowsDate.setDate(tomorrowsDate.getDate() +1)
+  tomorrowsDate.setDate(tomorrowsDate.getDate() + 1);
   const [value, setValue] = useState([todaysDate, tomorrowsDate]);
+
+  const [dropdownValue, setDropdownValue] = useState(1);
+
+  const handleDropChange = (event) => {
+    event.preventDefault();
+    setDropdownValue(event.target.value);
+  };
 
   const handleValue = (newValue) => {
     setValue(newValue);
-  };
-
-  const [guests, setGuests] = useState(1);
-
-  const handleChange = (event) => {
-    event.preventDefault();
-    setGuests(event.target.value);
   };
 
   const [open, setOpen] = useState(false);
@@ -35,11 +36,9 @@ const Inquiry = ({ price, tripLink, stars, rating, breakfast, title }) => {
   const handleClose = () => setOpen(false);
 
   let numberOfStars = [];
-          for (let i = 0; i < stars; i++) {
-            numberOfStars.push(
-              <FontAwesomeIcon key={numberOfStars} icon={faStar} />
-            );
-          }
+  for (let i = 0; i < stars; i++) {
+    numberOfStars.push(<FontAwesomeIcon key={numberOfStars} icon={faStar} />);
+  }
 
   return (
     <div className="inquiry__container">
@@ -49,10 +48,10 @@ const Inquiry = ({ price, tripLink, stars, rating, breakfast, title }) => {
             <span className="inquiry__box--price">From {price} NOK</span> per
             night
           </span>
-          <div>
-            {numberOfStars}
-          </div>
-          <span className="inquiry__box--breakfast">{breakfast ? "Breakfast Included" : "Breakfast not Included"}</span>
+          <div>{numberOfStars}</div>
+          <span className="inquiry__box--breakfast">
+            {breakfast ? "Breakfast Included" : "Breakfast not Included"}
+          </span>
         </div>
         <div className="reviews">
           <div className="inquiry__box--circle">
@@ -70,20 +69,30 @@ const Inquiry = ({ price, tripLink, stars, rating, breakfast, title }) => {
         </div>
         <div className="inquiry__box--form">
           <RangeDatePicker value={value} onChange={handleValue} />
-          <DropDown guests={guests} onChange={handleChange} />
+          <DropDown
+            dropValue={dropdownValue}
+            dropChange={handleDropChange}
+            label="Guests"
+          >
+            <MenuItem value={1}>1 guest</MenuItem>
+            <MenuItem value={2}>2 guests</MenuItem>
+            <MenuItem value={3}>3 guests</MenuItem>
+            <MenuItem value={4}>4 guests</MenuItem>
+          </DropDown>
         </div>
-        <Button onClick={handleOpen}>Book</Button>
+        <button className="btn" onClick={handleOpen}>Book</button>
         <HideOn divID="map">
           <FloatingContact onClick={handleOpen} />
         </HideOn>
         <BookingModal
           dateChange={handleValue}
           value={value}
-          onChange={handleChange}
-          guests={guests}
           open={open}
+          dropValue={dropdownValue}
+          dropChange={handleDropChange}
           onClose={handleClose}
           title={title}
+          label="Guests"
         />
       </div>
     </div>

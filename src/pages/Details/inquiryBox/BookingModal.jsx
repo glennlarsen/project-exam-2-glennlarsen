@@ -14,6 +14,7 @@ import schema from "utils/schema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import InputAdornment from "@mui/material/InputAdornment";
 import ErrorRoundedIcon from "@mui/icons-material/ErrorRounded";
+import MenuItem from "@mui/material/MenuItem";
 
 const boxStyle = {
   position: "absolute",
@@ -41,11 +42,12 @@ const closeStyle = {
 const BookingModal = ({
   open,
   onClose,
-  guests,
-  onChange,
+  label,
   dateChange,
   value,
   title,
+  dropValue,
+  dropChange,
 }) => {
   const [submitted, setSubmitted] = useState(false);
 
@@ -83,7 +85,7 @@ const BookingModal = ({
             noValidate
           >
             <CloseRoundedIcon onClick={onClose} sx={closeStyle} />
-            <Heading level={3}>Send a booking request for {title}</Heading>
+            <Heading level={3}>`Send a booking request for {title}`</Heading>
             <InputsTheme>
               <TextField
                 label={"Name"}
@@ -102,7 +104,7 @@ const BookingModal = ({
                           </InputAdornment>
                         ),
                       }
-                    : ""
+                    : null
                 }
               />
               <TextField
@@ -122,7 +124,7 @@ const BookingModal = ({
                           </InputAdornment>
                         ),
                       }
-                    : ""
+                    : null
                 }
               />
               <TextField
@@ -130,11 +132,17 @@ const BookingModal = ({
                 label="Comment"
                 multiline
                 maxRows={4}
+                type="text"
                 placeholder="optional"
               />
             </InputsTheme>
             <RangeDatePicker value={value} onChange={dateChange} />
-            <DropDown guests={guests} onChange={onChange} />
+            <DropDown dropValue={dropValue} dropChange={dropChange} label={label}>
+              <MenuItem value={1}>1 guest</MenuItem>
+              <MenuItem value={2}>2 guests</MenuItem>
+              <MenuItem value={3}>3 guests</MenuItem>
+              <MenuItem value={4}>4 guests</MenuItem>
+            </DropDown>
             <button type="submit" className="btn">
               Send
             </button>

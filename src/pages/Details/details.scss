@@ -131,8 +131,9 @@
   transition: .4s;
 }
 
-.pin:hover .pin-text {
+.pin:hover, .pin:hover .pin-text {
   opacity: 1;
+  filter: brightness(1.2);
 }
 
 @media screen and (min-width: 830px) {
@@ -144,7 +145,7 @@
     }
   }
   .google-map {
-    height: 50vh;
+    height: 55vh;
   }
 
   .pin {
@@ -271,7 +272,6 @@
   &-image {
     height: 100%;
     width: 100%;
-    object-fit: cover !important;
   }
 
   &-thumbnails-wrapper {
@@ -310,6 +310,7 @@
   @media screen and (min-width: 830px) {
   &-slides {
     border-radius: $border-radius-primary;
+    background: $color-grey;
   }
 
   &-slide {

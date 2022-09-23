@@ -76,7 +76,7 @@ function ContactForm() {
                     </InputAdornment>
                   ),
                 }
-              : ""
+              : null
           }
         />
         <TextField
@@ -96,7 +96,7 @@ function ContactForm() {
                     </InputAdornment>
                   ),
                 }
-              : ""
+              : null
           }
         />
 
@@ -118,7 +118,7 @@ function ContactForm() {
                     </InputAdornment>
                   ),
                 }
-              : ""
+              : null
           }
         />
 
@@ -141,7 +141,7 @@ function ContactForm() {
                     </InputAdornment>
                   ),
                 }
-              : ""
+              : null
           }
         />
       </InputsTheme>

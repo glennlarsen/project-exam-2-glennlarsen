@@ -90,7 +90,7 @@ const itemImages = images.data;
             />
           </div>
           <Map
-            heading={"Map"}
+            heading="Map"
             location={address}
             zoomLevel={16}
           />

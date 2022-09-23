@@ -12,7 +12,7 @@ const Heading = ({ level, children, color, textWidth, mb }) => {
 };
 
 Heading.propTypes = {
-  children: PropTypes.string,
+  children: PropTypes.any,
   level: PropTypes.number,
   color: PropTypes.string,
   textWidth: PropTypes.number,
