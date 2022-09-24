@@ -8,21 +8,21 @@ import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
 
 function AddFacilities() {
   const [state, setState] = useState({
-    wifi: false,
-    spa: false,
-    roomservice: false,
-    pool: false,
-    petfriendly: false,
-    parking: false,
-    minibar: false,
-    laundry: false,
-    jacuzzi: false,
-    iron: false,
-    gym: false,
-    breakfast: false,
-    bathtub: false,
-    ac: false,
-    frontdesk: false,
+    Wifi: false,
+    Spa: false,
+    Roomservice: false,
+    Pool: false,
+    Petfriendly: false,
+    Parking: false,
+    Minibar: false,
+    Laundry: false,
+    Jacuzzi: false,
+    Iron: false,
+    Gym: false,
+    Breakfast: false,
+    Bathtub: false,
+    AC: false,
+    Frontdesk: false,
   });
 
   const [showAllFacilities, setShowAllFacilities] = useState(false);
@@ -59,19 +59,19 @@ function AddFacilities() {
           );
         })}
       </FormGroup>
-      {!showAllFacilities ? (
-        <FontAwesomeIcon
-          onClick={toogleAllFacilities}
-          icon={faChevronDown}
-          size="2x"
-        />
-      ) : (
-        <FontAwesomeIcon
-          onClick={toogleAllFacilities}
-          icon={faChevronUp}
-          size="2x"
-        />
-      )}
+      <div>
+        {!showAllFacilities ? (
+          <span className="add__facilities--expand" onClick={toogleAllFacilities}>
+            <FontAwesomeIcon icon={faChevronDown} size="1x" />
+            More Facilities
+          </span>
+        ) : (
+          <span className="add__facilities--expand" onClick={toogleAllFacilities}>
+            <FontAwesomeIcon icon={faChevronUp} size="1x" />
+            Less Facilities
+          </span>
+        )}
+      </div>
     </>
   );
 }

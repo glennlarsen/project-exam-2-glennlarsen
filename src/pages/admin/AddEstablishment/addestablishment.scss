@@ -18,19 +18,40 @@
     flex-direction: column;
   overflow: hidden;
   flex-wrap: nowrap !important;
-  height: 330px;
-  transition: height 0.3s ease-in-out;
+  height: 335px;
   background: white;
   position: relative;
 
-  & .svg-inline--fa {
-    position: absolute;
-    bottom: 0;
-    right: 50%;
+  &--expand {
+    display: flex;
+    align-items: center;
+    gap: .9em;
     cursor: pointer;
+
+    &:hover {
+      color: $color-secondary;
+    }
   }
 }
 
 .add__facilities--show {
   height: 100%;
+}
+
+.remove__image {
+  position: absolute; 
+  bottom: 0; 
+  width: 100%; 
+  left: 0;
+  background: $color-error;
+  color: white;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  padding: .2em 0;
+  border-radius: 0 0 12px 12px;
+
+  &:hover {
+    filter: brightness(.8);
+  }
 }

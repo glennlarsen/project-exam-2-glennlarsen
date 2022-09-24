@@ -14,14 +14,13 @@ import "./addestablishment.scss";
 import DropDown from "components/forms/Dropdown";
 import MenuItem from "@mui/material/MenuItem";
 import AddressAutoComplete from "./AddressAutoComplete";
-import Radio from "@mui/material/Radio";
-import RadioGroup from "@mui/material/RadioGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
-import Rating from "@mui/material/Rating";
 import FormGroup from "@mui/material/FormGroup";
 import AddFacilities from "./AddFacilities";
+import AddStarRating from "./AddStarRating";
+import BreakfastIncluded from "./BreakfastIncluded";
+import AddImages from "./AddImages";
 
 const boxStyle = {
   display: "flex",
@@ -41,7 +40,6 @@ const boxStyle = {
 
 const AddEstablishment = () => {
   const [typeValue, setTypeValue] = useState(1);
-  const [starValue, setStarValue] = useState(1);
 
   const handleTypeChange = (event) => {
     event.preventDefault();
@@ -101,48 +99,12 @@ const AddEstablishment = () => {
                   .slice(0, 6);
               }}
             />
-            <FormControl>
-              <FormLabel id="breakfast-row-radio-buttons-group-label">
-                Breakfast Included
-              </FormLabel>
-              <RadioGroup
-                row
-                aria-labelledby="breakfast-radio-buttons-group-label"
-                name="breakfast-radio-buttons-group"
-                defaultValue={true}
-              >
-                <FormControlLabel
-                  value={true}
-                  control={<Radio />}
-                  label="Yes"
-                />
-                <FormControlLabel
-                  value={false}
-                  control={<Radio />}
-                  label="No"
-                />
-              </RadioGroup>
-            </FormControl>
+            <BreakfastIncluded />
             <FormControl>
               <FormLabel id="breakfast-row-radio-buttons-group-label">
                 Star Rating
               </FormLabel>
-              <Rating
-                size="large"
-                name="simple-controlled"
-                sx={{
-                  "& .MuiRating-iconFilled": {
-                    color: "black",
-                  },
-                  "& .MuiRating-iconHover": {
-                    color: "black",
-                  },
-                }}
-                defaultValue={1}
-                onChange={(event, newValue) => {
-                  setStarValue(newValue);
-                }}
-              />
+              <AddStarRating />
             </FormControl>
             <FormGroup>
               <Heading level={3}>TripAdvisor</Heading>
@@ -162,6 +124,9 @@ const AddEstablishment = () => {
               placeholder="Ex. 4.3"
             />
             <AddFacilities />
+            <Heading level={2}>Images</Heading>
+            <AddImages />
+            <button type="submit" className="btn">Add</button>
           </InputsTheme>
         </Box>
       </OuterContainer>
