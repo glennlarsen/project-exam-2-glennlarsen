@@ -1,5 +1,26 @@
 @import "../../../sass//partials/variables";
 
+.addestablishment__container {
+  display: flex;
+  flex-direction: column;
+  max-width: 800px;
+  width: 95%;
+  background: white;
+  border-radius: $border-radius-primary;
+  gap: 1em;
+  box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;
+  padding: 2em;
+  padding-top: 1em;
+  margin: 0 auto;
+  margin-bottom: 2em;
+
+  @media screen and (min-width: 830px) {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+//Add Address
 .pac-container {
   font-family: $font-primary;
   border-radius: $border-radius-primary;
@@ -13,45 +34,73 @@
   background: $color-background;
 }
 
+.breakfast-star__container {
+  display: flex;
+  flex-direction: column;
+
+  @media screen and (min-width: 830px) {
+    flex-direction: row;
+    gap: 2em;
+  }
+
+}
+
+//Add Facilities
 .add__facilities {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
   overflow: hidden;
   flex-wrap: nowrap !important;
-  height: 335px;
+  max-height: 335px;
   background: white;
   position: relative;
 
   &--expand {
     display: flex;
     align-items: center;
-    gap: .9em;
+    gap: 0.9em;
     cursor: pointer;
 
     &:hover {
       color: $color-secondary;
     }
+
+    @media screen and (min-width: 637px) {
+      display: none;
+    }
   }
 }
 
 .add__facilities--show {
-  height: 100%;
+  max-height: 100%;
+}
+
+//Add images
+.add__images--container {
+  display: flex;
+  flex-direction: column;
 }
 
 .remove__image {
-  position: absolute; 
-  bottom: 0; 
-  width: 100%; 
+  position: absolute;
+  bottom: 0;
+  width: 100%;
   left: 0;
   background: $color-error;
   color: white;
   font-weight: bold;
   border: none;
   cursor: pointer;
-  padding: .2em 0;
+  padding: 0.2em 0;
   border-radius: 0 0 12px 12px;
 
   &:hover {
-    filter: brightness(.8);
+    filter: brightness(0.8);
   }
+}
+
+.remove__image--all {
+  margin: 0.2em 0;
+  cursor: pointer;
+  align-self: flex-end;
 }

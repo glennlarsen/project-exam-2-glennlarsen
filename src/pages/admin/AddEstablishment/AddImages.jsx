@@ -1,5 +1,7 @@
 import React, { useEffect, useState, useMemo } from "react";
 import { useDropzone } from "react-dropzone";
+import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
+import Tooltip from "@mui/material/Tooltip";
 
 const thumbsContainer = {
   display: "flex",
@@ -93,6 +95,7 @@ function AddImages() {
   const removeAll = () => {
     setFiles([])
   }
+  console.log(files)
 
   const style = useMemo(() => ({
     ...baseStyle,
@@ -127,11 +130,12 @@ function AddImages() {
   }, []);
 
   return (
-    <section className="container">
+    <section className="add__images--container">
       <div {...getRootProps({ style })}>
         <input {...getInputProps()} />
         <p>Drag 'n' drop images here, or click to select images</p>
       </div>
+      {files.length > 0 ? <Tooltip title="Remove All"><DeleteRoundedIcon className="remove__image--all" onClick={removeAll} /></Tooltip> : null }
       <aside style={thumbsContainer}>{thumbs}</aside>
     </section>
   );

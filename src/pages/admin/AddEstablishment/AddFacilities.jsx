@@ -5,6 +5,7 @@ import Checkbox from "@mui/material/Checkbox";
 import FormGroup from "@mui/material/FormGroup";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
+import Grid from '@mui/material/Unstable_Grid2';
 
 function AddFacilities() {
   const [state, setState] = useState({
@@ -46,9 +47,11 @@ function AddFacilities() {
         } add__facilities`}
       >
         <Heading level={2}>Facilities</Heading>
+        <Grid container columns={{ xs: 4, sm: 8, md: 12 }}>
         {Object.keys(state).map((item, index) => {
           return (
             <FormControlLabel
+              sx={{minWidth: "170px"}}
               key={index}
               name={item}
               checked={state[item]}
@@ -58,8 +61,8 @@ function AddFacilities() {
             />
           );
         })}
+        </Grid>
       </FormGroup>
-      <div>
         {!showAllFacilities ? (
           <span className="add__facilities--expand" onClick={toogleAllFacilities}>
             <FontAwesomeIcon icon={faChevronDown} size="1x" />
@@ -71,7 +74,6 @@ function AddFacilities() {
             Less Facilities
           </span>
         )}
-      </div>
     </>
   );
 }

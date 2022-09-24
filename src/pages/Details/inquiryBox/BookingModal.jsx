@@ -85,7 +85,7 @@ const BookingModal = ({
             noValidate
           >
             <CloseRoundedIcon onClick={onClose} sx={closeStyle} />
-            <Heading level={3}>`Send a booking request for {title}`</Heading>
+            <Heading level={3}>Send a booking request for {title}</Heading>
             <InputsTheme>
               <TextField
                 label={"Name"}

@@ -14,29 +14,11 @@ import "./addestablishment.scss";
 import DropDown from "components/forms/Dropdown";
 import MenuItem from "@mui/material/MenuItem";
 import AddressAutoComplete from "./AddressAutoComplete";
-import FormControl from "@mui/material/FormControl";
-import FormLabel from "@mui/material/FormLabel";
 import FormGroup from "@mui/material/FormGroup";
 import AddFacilities from "./AddFacilities";
 import AddStarRating from "./AddStarRating";
 import BreakfastIncluded from "./BreakfastIncluded";
 import AddImages from "./AddImages";
-
-const boxStyle = {
-  display: "flex",
-  flexDirection: "column",
-  maxWidth: 800,
-  width: "95%",
-  bgcolor: "background.paper",
-  borderRadius: "12px",
-  gap: 2,
-  boxShadow: 5,
-  p: 4,
-  pt: 2,
-  margin: "0 auto",
-  mb: 4,
-  transition: "height 0.3s ease-in-out",
-};
 
 const AddEstablishment = () => {
   const [typeValue, setTypeValue] = useState(1);
@@ -59,9 +41,9 @@ const AddEstablishment = () => {
           iconToolTip="Go Back"
           iconLink="/establishments"
         />
-        <Box sx={boxStyle} component="form" noValidate>
+         <InputsTheme>
+        <Box className="addestablishment__container" component="form" noValidate>
           <Heading level={2}>Details</Heading>
-          <InputsTheme>
             <TextField
               label={"Title"}
               id="title"
@@ -99,13 +81,10 @@ const AddEstablishment = () => {
                   .slice(0, 6);
               }}
             />
+            <div className="breakfast-star__container">
             <BreakfastIncluded />
-            <FormControl>
-              <FormLabel id="breakfast-row-radio-buttons-group-label">
-                Star Rating
-              </FormLabel>
               <AddStarRating />
-            </FormControl>
+              </div>
             <FormGroup>
               <Heading level={3}>TripAdvisor</Heading>
               <TextField
@@ -126,9 +105,9 @@ const AddEstablishment = () => {
             <AddFacilities />
             <Heading level={2}>Images</Heading>
             <AddImages />
-            <button type="submit" className="btn">Add</button>
-          </InputsTheme>
+            <button type="submit" className="btn btn-form">Add</button>
         </Box>
+        </InputsTheme>
       </OuterContainer>
     </Layout>
   );
