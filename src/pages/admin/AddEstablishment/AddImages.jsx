@@ -1,7 +1,8 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState, useMemo, useCallback } from "react";
 import { useDropzone } from "react-dropzone";
-import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
+import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
 import Tooltip from "@mui/material/Tooltip";
+import TextField from "@mui/material/TextField";
 
 const thumbsContainer = {
   display: "flex",
@@ -38,75 +39,86 @@ const img = {
 };
 
 const baseStyle = {
-    flex: 1,
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: "center",
-    padding: '20px',
-    borderWidth: 2,
-    borderRadius: 12,
-    borderColor: '#707070',
-    borderStyle: 'dashed',
-    backgroundColor: 'white',
-    color: '#707070',
-    outline: 'none',
-    minHeight: "200px",
-    transition: 'border .24s ease-in-out'
-  };
-  
-  const focusedStyle = {
-    borderColor: '#17396D'
-  };
-  
-  const acceptStyle = {
-    borderColor: '#00e676'
-  };
-  
-  const rejectStyle = {
-    borderColor: '#d32f2f'
-  };
+  flex: 1,
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "center",
+  padding: "20px",
+  borderWidth: 2,
+  borderRadius: 12,
+  borderColor: "#707070",
+  borderStyle: "dashed",
+  backgroundColor: "white",
+  color: "#707070",
+  outline: "none",
+  minHeight: "200px",
+  transition: "border .24s ease-in-out",
+};
 
-function AddImages() {
+const focusedStyle = {
+  borderColor: "#17396D",
+};
+
+const acceptStyle = {
+  borderColor: "#00e676",
+};
+
+const rejectStyle = {
+  borderColor: "#d32f2f",
+};
+
+function AddImages({ name, register, id, setValue, errors }) {
   const [files, setFiles] = useState([]);
-  const { getRootProps, getInputProps, isFocused, isDragAccept, isDragReject } = useDropzone({
-    accept: {
-      "image/jpeg": [],
-      "image/jpg": [],
-      "image/png": [],
-    },
-    onDrop: (acceptedFiles) => {
+
+  const onDrop = useCallback(
+    (acceptedFiles) => {
       setFiles(
         acceptedFiles.map((file) =>
-          Object.assign(file, {
-            preview: URL.createObjectURL(file),
-          })
+          Object.assign(
+            file,
+            {
+              preview: URL.createObjectURL(file),
+            },
+            setValue(name, acceptedFiles, { shouldValidate: true })
+          )
         )
       );
     },
-  });
+    [setValue, name]
+  );
 
-  const removeFile = file => () => {
-    const newFiles = [...files]
-    newFiles.splice(newFiles.indexOf(file), 1)
-    setFiles(newFiles)
-  }
+  const { getRootProps, getInputProps, isFocused, isDragAccept, isDragReject } =
+    useDropzone({
+      accept: {
+        "image/*": [".jpeg", ".jpg", ".png"],
+      },
+      minSize: 0,
+      onDrop,
+    });
+
+  const removeFile = (file) => () => {
+    const newFiles = [...files];
+    newFiles.splice(newFiles.indexOf(file), 1);
+    setFiles(newFiles);
+    setValue(name, newFiles, { shouldValidate: true });
+  };
 
   const removeAll = () => {
-    setFiles([])
-  }
-  console.log(files)
+    setFiles([]);
+    setValue(name, [], { shouldValidate: false });
+  };
+  console.log(files);
 
-  const style = useMemo(() => ({
-    ...baseStyle,
-    ...(isFocused ? focusedStyle : {}),
-    ...(isDragAccept ? acceptStyle : {}),
-    ...(isDragReject ? rejectStyle : {})
-  }), [
-    isFocused,
-    isDragAccept,
-    isDragReject
-  ]);
+  const style = useMemo(
+    () => ({
+      ...baseStyle,
+      ...(isFocused ? focusedStyle : {}),
+      ...(isDragAccept ? acceptStyle : {}),
+      ...(isDragReject ? rejectStyle : {}),
+    }),
+    [isFocused, isDragAccept, isDragReject]
+  );
 
   const thumbs = files.map((file) => (
     <div style={thumb} key={file.name}>
@@ -118,9 +130,11 @@ function AddImages() {
           onLoad={() => {
             URL.revokeObjectURL(file.preview);
           }}
-          />
+        />
       </div>
-      <button className="remove__image" onClick={removeFile(file)}>Remove</button>
+      <button className="remove__image" onClick={removeFile(file)}>
+        Remove
+      </button>
     </div>
   ));
 
@@ -132,11 +146,31 @@ function AddImages() {
   return (
     <section className="add__images--container">
       <div {...getRootProps({ style })}>
-        <input {...getInputProps()} />
-        <p>Drag 'n' drop images here, or click to select images</p>
+        <TextField
+          {...getInputProps()}
+          type="file"
+          name={name}
+          id={id}
+          multiple
+          {...register(name)}
+        />
+        <p>Drop images here, or click to select images</p>
+        <span>Filetypes: PNG, JPEG</span>
       </div>
-      {files.length > 0 ? <Tooltip title="Remove All"><DeleteRoundedIcon className="remove__image--all" onClick={removeAll} /></Tooltip> : null }
+      {files.length > 0 ? (
+        <Tooltip title="Remove All">
+          <DeleteRoundedIcon
+            className="remove__image--all"
+            onClick={removeAll}
+          />
+        </Tooltip>
+      ) : null}
       <aside style={thumbsContainer}>{thumbs}</aside>
+      {errors.images ? (
+        <span className="errors">{errors.images.message}</span>
+      ) : (
+        ""
+      )}
     </section>
   );
 }

@@ -6,37 +6,16 @@ import FormGroup from "@mui/material/FormGroup";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
 import Grid from '@mui/material/Unstable_Grid2';
+import useApi from "utils/useApi";
+import { BASE_URL, FACILITIES } from "utils/api";
 
-function AddFacilities() {
-  const [state, setState] = useState({
-    Wifi: false,
-    Spa: false,
-    Roomservice: false,
-    Pool: false,
-    Petfriendly: false,
-    Parking: false,
-    Minibar: false,
-    Laundry: false,
-    Jacuzzi: false,
-    Iron: false,
-    Gym: false,
-    Breakfast: false,
-    Bathtub: false,
-    AC: false,
-    Frontdesk: false,
-  });
-
+function AddFacilities({register}) {
+  const url = BASE_URL + FACILITIES;
+  const { facilities, loading, error } = useApi(url);
   const [showAllFacilities, setShowAllFacilities] = useState(false);
 
   const toogleAllFacilities = (event) => {
     setShowAllFacilities((current) => !current);
-  };
-
-  const handleChange = (event) => {
-    setState({
-      ...state,
-      [event.target.name]: event.target.checked,
-    });
   };
 
   return (
@@ -48,16 +27,18 @@ function AddFacilities() {
       >
         <Heading level={2}>Facilities</Heading>
         <Grid container columns={{ xs: 4, sm: 8, md: 12 }}>
-        {Object.keys(state).map((item, index) => {
+        {facilities.map(facility => {
+          const { name, tags } = facility.attributes;
           return (
             <FormControlLabel
               sx={{minWidth: "170px"}}
-              key={index}
-              name={item}
-              checked={state[item]}
-              onChange={handleChange}
+              key={facility.id}
+              id={tags}
+              name={`facilities[${facility.id}]`}
+              value={facility.id}
               control={<Checkbox />}
-              label={item}
+              label={name}
+              inputRef={register}
             />
           );
         })}

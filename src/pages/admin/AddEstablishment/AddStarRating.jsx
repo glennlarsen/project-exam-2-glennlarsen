@@ -1,34 +1,33 @@
-import React, { useState } from "react";
+import React from "react";
 import Rating from "@mui/material/Rating";
-import FormControl from "@mui/material/FormControl";
+import { FormGroup } from "@mui/material";
 import FormLabel from "@mui/material/FormLabel";
+import { Controller } from "react-hook-form";
 
-function AddStarRating() {
-  const [starValue, setStarValue] = useState(1);
-  return (
-    <FormControl>
-      <FormLabel id="breakfast-row-radio-buttons-group-label">
-        Star Rating
-      </FormLabel>
-      <Rating
-        size="large"
-        name="simple-controlled"
-        sx={{
-          "& .MuiRating-iconFilled": {
-            color: "black",
-          },
-          "& .MuiRating-iconHover": {
-            color: "black",
-          },
-        }}
-        value={starValue}
-        defaultValue={starValue}
-        onChange={(event, newValue) => {
-          setStarValue(newValue);
-        }}
-      />
-    </FormControl>
-  );
-}
-
+const AddStarRating = ({control}) => (
+  <FormGroup>
+    <FormLabel>Star Rating</FormLabel>
+    <Controller
+      render={({ field: { onChange, value } }) => (
+        <Rating
+          value={Number(value)}
+          onChange={onChange}
+          size="large"
+          sx={{
+            "& .MuiRating-iconFilled": {
+              color: "black",
+            },
+            "& .MuiRating-iconHover": {
+              color: "black",
+            },
+          }}
+        />
+      )}
+      name="starsRating"
+      control={control}
+      defaultValue={1}
+      onChange={([, value]) => value}
+    />
+  </FormGroup>
+);
 export default AddStarRating;

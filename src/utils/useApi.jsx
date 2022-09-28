@@ -4,6 +4,7 @@ import axios from "axios";
 function useApi(url) {
   const [establishments, setEstablishments] = useState([]);
   const [establishment, setEstablishment] = useState(null);
+  const [facilities, setFacilities] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
@@ -15,6 +16,7 @@ function useApi(url) {
         const data = response.data.data;
         setEstablishments(data);
         setEstablishment(data);
+        setFacilities(data);
       } catch (error) {
         setError(true);
       } finally {
@@ -27,6 +29,7 @@ function useApi(url) {
   return {
     establishments,
     establishment,
+    facilities,
     loading,
     error,
   };

@@ -31,7 +31,7 @@ function Card({ establishments, numberOfCards, loading, type }) {
           return (
             <Link key={item.id} to={`details/${item.id}`} className="card">
               <div className="card__image">
-                <img src={image} alt={title} />
+                <img src={image ? image : "https://via.placeholder.com/600"} alt={title} />
                 <div className="card__title">
                   <Heading level={3}>{title}</Heading>
                 </div>

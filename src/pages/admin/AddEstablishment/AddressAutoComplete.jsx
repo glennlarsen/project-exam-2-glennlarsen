@@ -1,10 +1,9 @@
-import React from "react";
-import TextField from "@mui/material/TextField";
 import { useRef, useEffect } from "react";
 
-function AddressAutoComplete() {
+const AddressAutoComplete = () => {
   const autoCompleteRef = useRef();
   const inputRef = useRef();
+
   const options = {
     componentRestrictions: { country: "no" },
     fields: ["address_components", "geometry", "icon", "name"],
@@ -16,17 +15,8 @@ function AddressAutoComplete() {
       options
     );
   }, []);
-
-  return (
-    <TextField
-      label={"Address"}
-      id="address"
-      variant={"outlined"}
-      type="text"
-      placeholder="Street address..."
-      inputRef={inputRef}
-    />
-  );
-}
+console.log(inputRef)
+  return inputRef;
+};
 
 export default AddressAutoComplete;
