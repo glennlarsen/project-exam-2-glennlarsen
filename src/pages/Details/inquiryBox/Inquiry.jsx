@@ -63,9 +63,13 @@ const Inquiry = ({ price, tripLink, stars, rating, breakfast, title }) => {
             />
             {rating.toFixed(1)}
           </div>
-          <a href={tripLink}>
-            <span>Reviews</span>
-          </a>
+          {tripLink ? (
+            <a href={tripLink}>
+              <span>Reviews</span>
+            </a>
+          ) : (
+            ""
+          )}
         </div>
         <div className="inquiry__box--form">
           <RangeDatePicker value={value} onChange={handleValue} />
@@ -80,7 +84,9 @@ const Inquiry = ({ price, tripLink, stars, rating, breakfast, title }) => {
             <MenuItem value={4}>4 guests</MenuItem>
           </DropDown>
         </div>
-        <button className="btn" onClick={handleOpen}>Book</button>
+        <button className="btn" onClick={handleOpen}>
+          Book
+        </button>
         <HideOn divID="map">
           <FloatingContact onClick={handleOpen} />
         </HideOn>

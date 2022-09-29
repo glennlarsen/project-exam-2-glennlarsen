@@ -19,9 +19,9 @@ const Categories = () => {
             Hotel
           </Link>
           <Link
-            to="/accommodation/bnb"
+            to="/accommodation/b&b"
             className={`${
-              type === "bnb" ? "searchbox__circle--active" : ""
+              type === "b&b" ? "searchbox__circle--active" : ""
             } searchbox__circle`}
           >
             B&B

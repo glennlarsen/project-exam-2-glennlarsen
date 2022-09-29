@@ -10,7 +10,7 @@ import RangeDatePicker from "components/forms/RangeDatePicker";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import InputsTheme from "components/forms/InputsTheme";
 import TextField from "@mui/material/TextField";
-import schema from "utils/schema";
+import schema from "pages/Contact/schemaContact";
 import { yupResolver } from "@hookform/resolvers/yup";
 import InputAdornment from "@mui/material/InputAdornment";
 import ErrorRoundedIcon from "@mui/icons-material/ErrorRounded";

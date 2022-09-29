@@ -2,7 +2,6 @@ import React, { useEffect, useState, useMemo, useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
 import Tooltip from "@mui/material/Tooltip";
-import TextField from "@mui/material/TextField";
 
 const thumbsContainer = {
   display: "flex",
@@ -68,7 +67,7 @@ const rejectStyle = {
   borderColor: "#d32f2f",
 };
 
-function AddImages({ name, register, id, setValue, errors }) {
+function AddImages({ name, id, setValue, errors }) {
   const [files, setFiles] = useState([]);
 
   const onDrop = useCallback(
@@ -88,14 +87,34 @@ function AddImages({ name, register, id, setValue, errors }) {
     [setValue, name]
   );
 
-  const { getRootProps, getInputProps, isFocused, isDragAccept, isDragReject } =
-    useDropzone({
-      accept: {
-        "image/*": [".jpeg", ".jpg", ".png"],
-      },
-      minSize: 0,
-      onDrop,
-    });
+  const {
+    getRootProps,
+    getInputProps,
+    isFocused,
+    fileRejections,
+    onError,
+    isDragAccept,
+    isDragReject,
+  } = useDropzone({
+    accept: {
+      "image/jpeg": [],
+      "image/jpg": [],
+      "image/png": [],
+    },
+    onDrop,
+    maxFiles: 15,
+  });
+
+  const fileRejectionItems = fileRejections.map(({ file, errors }) => (
+    <li key={file.path}>
+      {file.path} - {file.size} bytes
+      <ul>
+        {errors.map((e) => (
+          <li key={e.code}>{e.message}</li>
+        ))}
+      </ul>
+    </li>
+  ));
 
   const removeFile = (file) => () => {
     const newFiles = [...files];
@@ -146,14 +165,7 @@ function AddImages({ name, register, id, setValue, errors }) {
   return (
     <section className="add__images--container">
       <div {...getRootProps({ style })}>
-        <TextField
-          {...getInputProps()}
-          type="file"
-          name={name}
-          id={id}
-          multiple
-          {...register(name)}
-        />
+        <input {...getInputProps()} name={name} id={id} multiple />
         <p>Drop images here, or click to select images</p>
         <span>Filetypes: PNG, JPEG</span>
       </div>
@@ -165,12 +177,15 @@ function AddImages({ name, register, id, setValue, errors }) {
           />
         </Tooltip>
       ) : null}
-      <aside style={thumbsContainer}>{thumbs}</aside>
-      {errors.images ? (
-        <span className="errors">{errors.images.message}</span>
-      ) : (
-        ""
-      )}
+      <aside style={thumbsContainer}>
+        {thumbs}
+        <ul className="errors">{fileRejectionItems}</ul>{" "}
+        {errors.images ? (
+          <span className="errors">{errors.images.message}</span>
+        ) : (
+          ""
+        )}
+      </aside>
     </section>
   );
 }

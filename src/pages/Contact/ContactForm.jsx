@@ -8,7 +8,10 @@ import Heading from "components/typography/Heading";
 import { yupResolver } from "@hookform/resolvers/yup";
 import InputAdornment from "@mui/material/InputAdornment";
 import ErrorRoundedIcon from "@mui/icons-material/ErrorRounded";
-import schema from "utils/schema";
+import schemaContact from "pages/Contact/schemaContact";
+import PostMessage from "utils/PostMessage";
+import MyLoader from "components/layout/MyLoader";
+import Alert from '@mui/material/Alert';
 
 const boxStyle = {
   display: "flex",
@@ -25,6 +28,8 @@ const boxStyle = {
 
 function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   const {
     register,
@@ -32,12 +37,32 @@ function ContactForm() {
     reset,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(schemaContact),
   });
 
-  function onSubmit() {
-    setSubmitted(true);
-    reset();
+  // Function that will run when form is submitted
+  async function onSubmit(data) {
+    setLoading(true);
+    const message = await PostMessage(data);
+    if (message.success) {
+      setLoading(false);
+      setSubmitted(true);
+      reset();
+    } else {
+      setLoading(false);
+      setSubmitted(false);
+      setError(true);
+    }
+  }
+
+  if (loading) {
+    return (
+        <MyLoader centered="100vh"> Sending, please wait...</MyLoader>
+    );
+  }
+
+  if (error) {
+    return <div>An error occured</div>;
   }
 
   return (
@@ -145,6 +170,7 @@ function ContactForm() {
           }
         />
       </InputsTheme>
+      {submitted && ( <Alert severity="success">Thank you for your message. We will get back to you shortly.</Alert> )}
       <button type="submit" className="btn btn-form">
         Send
       </button>

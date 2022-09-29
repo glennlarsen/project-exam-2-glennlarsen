@@ -21,10 +21,9 @@ import AddStarRating from "./AddStarRating";
 import BreakfastIncluded from "./BreakfastIncluded";
 import AddImages from "./AddImages";
 import AuthContext from "utils/AuthContext";
-import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import MyLoader from "components/layout/MyLoader";
-import PostApi from "utils/PostApi";
+import PostEstablishment from "utils/PostEstablishment";
 import ReactHookFormSelect from "components/forms/ReactHookFormSelect";
 import AddressAutoComplete from "./AddressAutoComplete";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -34,39 +33,14 @@ import useApi from "utils/useApi";
 import { BASE_URL, FACILITIES } from "utils/api";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-
-const schema = yup.object().shape({
-  title: yup
-    .string()
-    .required("Please enter a title")
-    .min(4, "Minimum 4 Characters"),
-  price: yup
-    .number()
-    .typeError("Price must be a number")
-    .required("Please enter a price")
-    .min(100, "Minimum 100 NOK"),
-  about: yup
-    .string()
-    .required("Please write an about text")
-    .min(10, "Minimum 10 Characters"),
-  address: yup.string().required("Please enter an address"),
-  breakfast: yup.boolean().required("Please select yes or no"),
-  starsRating: yup.number("Please select how many stars"),
-  tripadvisorlink: yup.string(),
-  rating: yup.number().notRequired().nullable(),
-  facilities: yup.array().nullable(),
-  images: yup.mixed().test("Required", "Please select at least one image", (value) => {
-    return value && value.length;
-  }),
-});
+import schemaAddEstablishment from "./schemaAddEstablishment";
+import Alert from '@mui/material/Alert';
 
 const AddEstablishment = () => {
   const [loading, setLoading] = useState(false);
   const [created, setCreated] = useState(false);
   const [error, setError] = useState(false);
-
   const [auth] = useContext(AuthContext);
-
   const addressRef = AddressAutoComplete();
 
   const url = BASE_URL + FACILITIES;
@@ -90,25 +64,28 @@ const AddEstablishment = () => {
     setValue,
     watch,
     formState: { errors },
-  } = useForm({ resolver: yupResolver(schema) });
+  } = useForm({ resolver: yupResolver(schemaAddEstablishment) });
 
   const watchAllFields = watch();
   console.log(watchAllFields);
 
   async function onSubmit(data) {
     const createEstablishment = window.confirm(
-      "This will create this accommodation. Are you sure you want to to that?"
+      "This will create this establishment. Are you sure you want to to that?"
     );
 
     if (createEstablishment) {
       setLoading(true);
-      const create = await PostApi(data, auth.jwt);
+      const create = await PostEstablishment(data, auth.jwt);
       console.log("upload succes:", create.success);
       if (create.success) {
         setLoading(false);
         setCreated(true);
         reset();
-				navigate("/establishments");
+        setTimeout(() => {
+        navigate("/establishments");
+        window.location.reload(true);
+      }, 3000);
       }
       if (!create) {
         setLoading(false);
@@ -119,7 +96,9 @@ const AddEstablishment = () => {
   }
 
   if (loading) {
-    return <><span>Uploading images, Please wait...</span><MyLoader /></>;
+    return (
+        <MyLoader centered="100vh"> It may take a few seconds to upload the images, please wait...</MyLoader>
+    );
   }
 
   if (error) {
@@ -146,6 +125,7 @@ const AddEstablishment = () => {
             onSubmit={handleSubmit(onSubmit)}
             noValidate
           >
+            {created && ( <Alert severity="success">Establishment successfully created! Redirecting you to establishments now...</Alert> )}
             <Heading level={2}>Details</Heading>
             <TextField
               label={"Title"}
@@ -179,6 +159,17 @@ const AddEstablishment = () => {
                       helperText={error?.message}
                       placeholder="Street address..."
                       {...register("address")}
+                      InputProps={
+                        error
+                          ? {
+                              endAdornment: (
+                                <InputAdornment position="end">
+                                  <ErrorRoundedIcon color="error" />
+                                </InputAdornment>
+                              ),
+                            }
+                          : null
+                      }
                     />
                   );
                 }}
@@ -287,7 +278,7 @@ const AddEstablishment = () => {
               type="number"
               placeholder="Ex. 4.3"
               {...register("rating", {
-                setValueAs: (v) => (v === "" ? null : parseInt(v)),
+                setValueAs: (v) => (v === "" ? null : parseFloat(v).toFixed(1)),
               })}
               error={Boolean(errors.rating)}
               helperText={errors.rating ? errors.rating.message : ""}
@@ -347,11 +338,10 @@ const AddEstablishment = () => {
             <Heading level={2}>Images</Heading>
             <AddImages
               setValue={setValue}
-							register={register}
               errors={errors}
-							name="images"
-							id="images"
-						/>
+              name="images"
+              id="images"
+            />
             <button type="submit" className="btn btn-form">
               Add
             </button>

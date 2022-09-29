@@ -10,6 +10,7 @@ import SocialMedia from "components/SocialMedia";
 import ContactForm from "./ContactForm";
 
 function Contact() {
+
   return (
     <Layout>
       <Head
