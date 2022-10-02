@@ -31,7 +31,6 @@
     "react-dom": "^18.2.0",
     "react-dropzone": "^14.2.2",
     "react-geocode": "^0.2.3",
-    "react-grid-system": "^8.1.6",
     "react-helmet": "^6.1.0",
     "react-hide-on-scroll": "^1.1.4",
     "react-hook-form": "^7.36.0",

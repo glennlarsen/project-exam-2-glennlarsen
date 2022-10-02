@@ -8,8 +8,8 @@ import MyLoader from "components/layout/MyLoader";
 import AlertMessage from "components/forms/AlertMessage";
 import FloatingContact from "./StickyBookButton";
 import BookingModal from "./BookingModal";
-import { HideOn } from "react-hide-on-scroll";
 
+import { HideOn } from "react-hide-on-scroll";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import MenuItem from "@mui/material/MenuItem";
