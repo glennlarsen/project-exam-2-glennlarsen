@@ -1,0 +1,34 @@
+@import "../../../sass/partials/variables";
+
+.detailsHeader {
+  p {
+    margin-top: 0.2em;
+    font-weight: 600;
+  }
+
+  .mapLink {
+    color: $color-secondary;
+    cursor: pointer;
+    font-weight: bold;
+
+    &:hover {
+      color: $color-primary;
+    }
+  }
+
+  &Top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    svg {
+      color: $color-secondary;
+      height: 1.2em;
+      vertical-align: bottom;
+
+      &:hover {
+        color: $color-primary;
+      }
+    }
+  }
+}

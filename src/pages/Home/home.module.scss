@@ -1,0 +1,43 @@
+@import "../../sass/partials/variables";
+@import "../../sass/partials/shapes";
+
+.headerIcon {
+  gap: 15px;
+  display: flex;
+  align-items: center;
+}
+
+.headerCircle {
+  @include circle($size: 60px, $borderWidth: 3px);
+  font-size: 0.7rem;
+
+  img {
+    max-width: 35px;
+  }
+}
+
+.headerIconText {
+  color: $color-primary;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.mainHome {
+  margin-top: 20em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  @media screen and (min-width: 830px) {
+    margin-top: 26em;
+  }
+
+  @media screen and (min-width: 992px) {
+    margin-top: 12em;
+  }
+}
+
+.popular {
+  width: 100%;
+  margin-top: 6em;
+}

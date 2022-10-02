@@ -7,13 +7,8 @@ const textFields = createTheme({
   },
 });
 
-function InputsTheme({children}) {
-
-  return (
-    <ThemeProvider theme={textFields}>
-      {children}
-    </ThemeProvider>
-  );
+function InputsTheme({ children }) {
+  return <ThemeProvider theme={textFields}>{children}</ThemeProvider>;
 }
 
 export default InputsTheme;

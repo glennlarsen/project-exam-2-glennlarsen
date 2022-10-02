@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import { NavLink } from "react-router-dom";
+import useLocalStorage from "utils/UseLocalStorage";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
+import DashboardCustomizeRoundedIcon from "@mui/icons-material/DashboardCustomizeRounded";
 
 const AdminMenu = ({ auth, logout }) => {
-  const [showAdminMenu, setShowAdminMenu] = useState(false);
+  const [showAdminMenu, setShowAdminMenu] = useLocalStorage("adminMenu", false);
 
   const toogleAdmin = (event) => {
     setShowAdminMenu((current) => !current);
@@ -13,7 +15,7 @@ const AdminMenu = ({ auth, logout }) => {
   return (
     <div className="admin-menu">
       <button onClick={toogleAdmin} className="admin-menu__toogle">
-        Admin{" "}
+        <DashboardCustomizeRoundedIcon /> Admin{" "}
         {!showAdminMenu ? (
           <FontAwesomeIcon icon={faChevronDown} size="1x" />
         ) : (

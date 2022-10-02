@@ -1,39 +1,46 @@
-import "./navigation.scss";
-import { bubble as Menu } from "react-burger-menu";
 import { useState, useContext } from "react";
-import AuthContext from "utils/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
-import logo from "../../../logo/HoliDaze-small.png";
-import NavLinksDesktop from "./NavLinksDesktop";
-import burger from "./bars-solid.svg";
+
 import Heading from "components/typography/Heading";
+import NavLinksDesktop from "./NavLinksDesktop";
 import { TabletAndDesktop, Mobile } from "../ScreenViewSize";
 import AdminMenu from "./AdminMenu";
+import AuthContext from "utils/AuthContext";
+import logo from "../../../logo/HoliDaze-small.png";
+import { bubble as Menu } from "react-burger-menu";
+import burger from "./bars-solid.svg";
+import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
+import ApartmentRoundedIcon from "@mui/icons-material/ApartmentRounded";
+import SendRoundedIcon from "@mui/icons-material/SendRounded";
 
 const Navigation = () => {
   const [menuState, setMenuState] = useState(false);
   const [auth, setAuth] = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const closeMenu = () => {
     setMenuState(false);
   };
 
-  const navigate = useNavigate();
-
   function logout() {
-    setAuth(null);
-    navigate("/");
+    const confirmLogout = window.confirm("Are you sure you want to logout?");
+    if (confirmLogout) {
+      setAuth(null);
+      navigate("/");
+    } else {
+      return;
+    }
   }
 
   return (
     <>
       <Mobile>
         <NavLink to="/">
-          <img src={logo} alt="Holidaze logo" className="logo logo-navbar" />
+          <img src={logo} alt="Holidaze logo" className="logo-navbar" />
         </NavLink>
         <Menu
-          width={320}
+          width={310}
           right
           customBurgerIcon={<img src={burger} />}
           isOpen={menuState}
@@ -42,21 +49,21 @@ const Navigation = () => {
             Menu
           </Heading>
           <NavLink to="/" onClick={() => closeMenu()} className="nav__link">
-            Home
+            <HomeRoundedIcon /> Home
           </NavLink>
           <NavLink
             to="/accommodation"
             onClick={() => closeMenu()}
             className="nav__link"
           >
-            Accommodation
+            <ApartmentRoundedIcon /> Accommodations
           </NavLink>
           <NavLink
             to="/contact"
             onClick={() => closeMenu()}
             className="nav__link"
           >
-            Contact
+            <SendRoundedIcon /> Contact
           </NavLink>
           {auth ? (
             <AdminMenu auth={auth} logout={logout} />

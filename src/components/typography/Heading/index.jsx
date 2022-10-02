@@ -6,8 +6,8 @@ const Heading = ({ level, children, color, textWidth, mb }) => {
     color: color,
     maxWidth: textWidth,
     marginBottom: mb + "em",
-  }
- 
+  };
+
   return <Level style={Style}>{children}</Level>;
 };
 

@@ -1,14 +1,13 @@
 import Loader from "react-loaders";
-import "./myLoader.scss";
+import styles from "./myLoader.module.scss";
 
-const MyLoader = ({children, centered}) => {
-
+const MyLoader = ({ children, height }) => {
   const centerStyle = {
-    height: centered
-  }
+    height: height,
+  };
 
   return (
-    <div style={centerStyle} className="loader-container">
+    <div style={centerStyle} className={styles.loaderContainer}>
       <Loader type="ball-clip-rotate" />
       <span>{children}</span>
     </div>

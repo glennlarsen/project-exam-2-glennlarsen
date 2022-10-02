@@ -1,40 +1,23 @@
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import axios from "axios";
-import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
+import styles from "./login.module.scss";
+import schemaLogin from "./schemaLogin";
 import AuthContext from "utils/AuthContext";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
+import { AUTH_URL } from "constants/apiKeys";
 import Heading from "components/typography/Heading";
 import InputsTheme from "components/forms/InputsTheme";
-import { AUTH_URL } from "utils/api";
+import AlertMessage from "components/forms/AlertMessage";
+
+import axios from "axios";
+import { yupResolver } from "@hookform/resolvers/yup";
+
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
 import ErrorRoundedIcon from "@mui/icons-material/ErrorRounded";
-import FormError from "components/forms/FormError";
 
-const boxStyle = {
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  maxWidth: 400,
-  width: "95%",
-  bgcolor: "background.paper",
-  borderRadius: "12px",
-  gap: 2,
-  boxShadow: 24,
-  p: 4,
-  margin: "auto",
-  mb: 4,
-};
-
-const url = AUTH_URL
-
-const schema = yup.object().shape({
-    identifier: yup.string().required("Please enter your username"),
-    password: yup.string().required("Please enter your password"),
-  });
+const url = AUTH_URL;
 
 const LoginForm = () => {
   const [submitting, setSubmitting] = useState(false);
@@ -48,7 +31,7 @@ const LoginForm = () => {
     reset,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(schemaLogin),
   });
 
   const [, setAuth] = useContext(AuthContext);
@@ -60,7 +43,7 @@ const LoginForm = () => {
 
     try {
       const response = await axios.post(url, data);
-      console.log(response)
+      console.log(response);
       setAuth(response.data);
       navigate("/establishments");
     } catch (error) {
@@ -72,10 +55,16 @@ const LoginForm = () => {
   }
 
   return (
-    <Box sx={boxStyle} component="form" onSubmit={handleSubmit(onSubmit)}>
+    <Box
+      className={styles.loginForm}
+      component="form"
+      onSubmit={handleSubmit(onSubmit)}
+    >
       <Heading level={1}>Login</Heading>
       <InputsTheme>
-      {loginError && <FormError>{loginError}</FormError>}
+        {loginError && (
+          <AlertMessage variant="error" title="Error" message={loginError} />
+        )}
         <TextField
           fullWidth
           label={"Username"}
@@ -117,7 +106,9 @@ const LoginForm = () => {
           }
         />
       </InputsTheme>
-      <button type="submit" className="btn">{submitting ? "Loggin in..." : "Login"}</button>
+      <button type="submit" className="btn">
+        {submitting ? "Loggin in..." : "Login"}
+      </button>
     </Box>
   );
 };

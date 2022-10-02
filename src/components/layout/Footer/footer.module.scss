@@ -1,7 +1,7 @@
 @import "../../../sass/partials/variables";
 @import "../../../sass/partials/shapes";
 
-footer {
+.footer {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -14,18 +14,18 @@ footer {
   }
 }
 
-.footer__content {
+.footerContent {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 
-  @media screen and (min-width: 992px) {
+  @media screen and (min-width: 885px) {
     flex-direction: row-reverse;
   }
 }
 
-.footer__content--links,
-.footer__content--contact {
+.footerContentLinks,
+.footerContentContact {
   display: flex;
   flex-direction: column;
   padding: 2em;
@@ -46,7 +46,7 @@ footer {
   }
 }
 
-.footer__content--logo {
+.footerContentLogo {
   padding: 2em;
 
   p {
@@ -58,7 +58,7 @@ footer {
   }
 }
 
-.footer__copyright {
+.footerCopyright {
   text-align: center;
   font-size: 0.9rem;
 }

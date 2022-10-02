@@ -6,8 +6,20 @@ function useApi(url) {
   const [establishment, setEstablishment] = useState(null);
   const [facilities, setFacilities] = useState([]);
   const [messages, setMessages] = useState([]);
+  const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [data, setData] = useState(null);
+  const [open, setOpen] = useState(false);
+
+  const toggleItem = (item) => {
+    setData(item);
+    setOpen(item !== null);
+  };
+
+  const closeModal = () => {
+    setOpen(false);
+  };
 
   useEffect(() => {
     async function fetchData() {
@@ -19,6 +31,7 @@ function useApi(url) {
         setEstablishment(data);
         setFacilities(data);
         setMessages(data);
+        setBookings(data);
       } catch (error) {
         setError(true);
       } finally {
@@ -33,8 +46,13 @@ function useApi(url) {
     establishment,
     facilities,
     messages,
+    bookings,
     loading,
     error,
+    data,
+    open,
+    toggleItem,
+    closeModal,
   };
 }
 

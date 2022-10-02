@@ -15,7 +15,7 @@ const AddressAutoComplete = () => {
       options
     );
   }, []);
-console.log(inputRef)
+  console.log(inputRef);
   return inputRef;
 };
 

@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import logo from "../../../logo/HoliDaze-small.png";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import "./navigation.scss";
+import Tooltip from "@mui/material/Tooltip";
 
 function NavLinksDesktop({ auth, logout }) {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -14,7 +14,6 @@ function NavLinksDesktop({ auth, logout }) {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  
 
   return (
     <div className="navbar">
@@ -26,22 +25,24 @@ function NavLinksDesktop({ auth, logout }) {
           Home
         </NavLink>
         <NavLink to="/accommodation" className="nav__link">
-          Accommodation
+          Accommodations
         </NavLink>
         <NavLink to="/contact" className="nav__link">
           Contact
         </NavLink>
         {auth ? (
           <>
-            <button
-              aria-controls={open ? "basic-menu" : undefined}
-              aria-haspopup="true"
-              aria-expanded={open ? "true" : undefined}
-              className="btn-navigation"
-              onClick={handleClick}
-            >
-              Admin
-            </button>
+            <Tooltip title={`User: ${auth.user.username}`}>
+              <button
+                aria-controls={open ? "basic-menu" : undefined}
+                aria-haspopup="true"
+                aria-expanded={open ? "true" : undefined}
+                className="btn-navigation"
+                onClick={handleClick}
+              >
+                Admin
+              </button>
+            </Tooltip>
             <Menu
               id="basic-menu"
               anchorEl={anchorEl}
@@ -51,9 +52,15 @@ function NavLinksDesktop({ auth, logout }) {
                 "aria-labelledby": "basic-button",
               }}
             >
-              <MenuItem onClick={handleClose}><NavLink to="/establishments">Establishments</NavLink></MenuItem>
-              <MenuItem onClick={handleClose}><NavLink to="/messages">Messages</NavLink></MenuItem>
-              <MenuItem onClick={handleClose}><NavLink to="/enquiries">Enquiries</NavLink></MenuItem>
+              <MenuItem onClick={handleClose}>
+                <NavLink to="/establishments">Establishments</NavLink>
+              </MenuItem>
+              <MenuItem onClick={handleClose}>
+                <NavLink to="/messages">Messages</NavLink>
+              </MenuItem>
+              <MenuItem onClick={handleClose}>
+                <NavLink to="/enquiries">Enquiries</NavLink>
+              </MenuItem>
               <MenuItem onClick={logout}>Logout</MenuItem>
             </Menu>
           </>

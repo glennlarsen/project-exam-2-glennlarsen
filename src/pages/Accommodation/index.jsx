@@ -1,12 +1,12 @@
 import React from "react";
-import "./accommodation.scss";
-import Layout from "components/layout/Layout";
-import OuterContainer from "../../components/layout/OuterContainer";
-import Head from "../../components/layout/Head";
-import Searchbox from "../../components/Searchbox";
-import { Mobile, TabletAndDesktop } from "components/layout/ScreenViewSize";
-import Listings from "../../components/Listings";
 import { useParams } from "react-router-dom";
+import styles from "./accommodation.module.scss";
+import Layout from "components/layout/Layout";
+import OuterContainer from "components/layout/OuterContainer";
+import Head from "components/layout/Head";
+import Searchbox from "components/Searchbox";
+import { Mobile, TabletAndDesktop } from "components/layout/ScreenViewSize";
+import Listings from "components/Listings";
 
 function Accommodation({ establishments, loading, error }) {
   const { type } = useParams();
@@ -36,7 +36,7 @@ function Accommodation({ establishments, loading, error }) {
                   width={100}
                 />
               </TabletAndDesktop>
-              <div className="accommodations"></div>
+              <div className={styles.accommodations}></div>
               <Listings
                 type={type}
                 establishments={establishments}

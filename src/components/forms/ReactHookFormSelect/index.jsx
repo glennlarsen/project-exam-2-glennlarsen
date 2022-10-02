@@ -1,7 +1,7 @@
+import { Controller } from "react-hook-form";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
-import { Controller } from "react-hook-form";
 
 const ReactHookFormSelect = ({
   name,
@@ -16,12 +16,15 @@ const ReactHookFormSelect = ({
     <FormControl {...props}>
       <InputLabel id={labelId}>{label}</InputLabel>
       <Controller
-        render={({field}) => (
-
-            <Select sx={{borderRadius: "12px"}} {...field} label={label}>
+        render={({ field }) => (
+          <Select
+            sx={{ borderRadius: "12px" }}
+            labelId={labelId}
+            label={label}
+            {...field}
+          >
             {children}
           </Select>
-
         )}
         name={name}
         control={control}

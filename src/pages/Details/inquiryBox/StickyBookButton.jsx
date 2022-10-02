@@ -1,22 +1,19 @@
-import React from 'react'
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar } from "@fortawesome/free-solid-svg-icons";
-import Button from "components/forms/Button";
+import React from "react";
+import styles from "./inquiry.module.scss";
 
-
-const StickyBookButton = ({ onClick }) => (
-<div className="floating-contact">
-    <div className="floating-contact__text">
-        <span><span className="floating-contact__text--price">From 1992 NOK </span>per night</span>
-        <div>
-          <FontAwesomeIcon icon={faStar} />
-          <FontAwesomeIcon icon={faStar} />
-          <FontAwesomeIcon icon={faStar} />
-          <FontAwesomeIcon icon={faStar} />
-        </div>
+const StickyBookButton = ({ onClick, price, stars }) => (
+  <div className={styles.floatingButton}>
+    <div className={styles.floatingButtonText}>
+      <span>
+        <span className={styles.floatingButtonPrice}>From {price} NOK </span>
+        per night
+      </span>
+      <div>{stars}</div>
     </div>
-    <button onClick={onClick} className="btn-floating">Book</button>
-</div>
-)
+    <button onClick={onClick} className="btn-floating">
+      Book
+    </button>
+  </div>
+);
 
 export default StickyBookButton;

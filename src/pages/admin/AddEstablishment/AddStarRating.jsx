@@ -4,7 +4,7 @@ import { FormGroup } from "@mui/material";
 import FormLabel from "@mui/material/FormLabel";
 import { Controller } from "react-hook-form";
 
-const AddStarRating = ({control}) => (
+const AddStarRating = ({ control }) => (
   <FormGroup>
     <FormLabel>Star Rating</FormLabel>
     <Controller

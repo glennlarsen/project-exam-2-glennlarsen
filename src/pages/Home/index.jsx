@@ -1,18 +1,19 @@
 import React from "react";
-import Layout from "components/layout/Layout";
-import Head from "../../components/layout/Head";
-import Heading from "../../components/typography/Heading";
-import Paragraph from "../../components/typography/Paragraph";
+import styles from "./home.module.scss";
 import background from "./background.jpg";
-import OuterContainer from "../../components/layout/OuterContainer";
-import { TabletAndDesktop } from "components/layout/ScreenViewSize";
-import Header from "../../components/layout/Header";
 import tripadvisor from "./tripadvisor-logo.png";
-import Searchbox from "../../components/Searchbox";
-import Listings from "../../components/Listings";
 
-function Home({establishments, loading, error}) {
+import Layout from "components/layout/Layout";
+import Head from "components/layout/Head";
+import Heading from "components/typography/Heading";
+import Paragraph from "components/typography/Paragraph";
+import OuterContainer from "components/layout/OuterContainer";
+import { TabletAndDesktop } from "components/layout/ScreenViewSize";
+import Header from "components/layout/Header";
+import Searchbox from "components/Searchbox";
+import Listings from "components/Listings";
 
+function Home({ establishments, loading, error }) {
   return (
     <Layout>
       <Head
@@ -31,19 +32,28 @@ function Home({establishments, loading, error}) {
                 by the fjords
               </Paragraph>
             </TabletAndDesktop>
-            <div className="header__icon">
-            <div className="header__circle"><img src={tripadvisor}/>certified</div>
-            <span className="hader__icon--text">Tripadvisor</span>
+            <div className={styles.headerIcon}>
+              <div className={styles.headerCircle}>
+                <img src={tripadvisor} />
+                certified
+              </div>
+              <span className={styles.headerIconText}>Tripadvisor</span>
             </div>
           </div>
           <Searchbox establishments={establishments} />
-          </Header>
-          <main className="main-home">
+        </Header>
+        <main className={styles.mainHome}>
           <Heading level={2}>Popular Hotels</Heading>
-          <div className='popular'>
-          <Listings establishments={establishments} loading={loading} error={error} MobileAndDesktopNumberOfCards={3} tabletNumberOfCards={2} />
+          <div className={styles.popular}>
+            <Listings
+              establishments={establishments}
+              loading={loading}
+              error={error}
+              MobileAndDesktopNumberOfCards={3}
+              tabletNumberOfCards={2}
+            />
           </div>
-          </main>
+        </main>
       </OuterContainer>
     </Layout>
   );

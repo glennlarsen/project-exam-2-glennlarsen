@@ -1,0 +1,13 @@
+//Add Address
+.pac-container {
+    font-family: $font-primary;
+    border-radius: $border-radius-primary;
+  }
+  .pac-item,
+  .pac-item-query {
+    color: $color-dark;
+    padding: 0.7em;
+  }
+  .pac-item:hover {
+    background: $color-background;
+  }

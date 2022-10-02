@@ -1,12 +1,10 @@
-import React from "react";
-import { useState } from "react";
-import "./searchbox.scss";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
-import { ReactSearchAutocomplete } from "react-search-autocomplete";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
 import Categories from "./Categories";
+import { ReactSearchAutocomplete } from "react-search-autocomplete";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
 
 function Searchbox({ establishments, maxWidth, width, dropdownStatus }) {
   const Style = {

@@ -1,4 +1,4 @@
-import { BASE_URL, ESTABLISHMENTS, POPULATE_ALL } from "utils/api";
+import { BASE_URL, ESTABLISHMENTS, POPULATE_ALL } from "constants/apiKeys";
 import axios from "axios";
 
 async function PostEstablishment(uploadData, token) {
@@ -6,9 +6,7 @@ async function PostEstablishment(uploadData, token) {
 
   // Handling the images and appending them to the formData
   const images = Array.from(uploadData.images);
-  console.log(images);
   images.forEach((image) => formData.append(`files.images`, image, image.name));
-  console.log(images);
 
   const data = {
     title: uploadData.title,
@@ -23,9 +21,7 @@ async function PostEstablishment(uploadData, token) {
     facilitiess: uploadData.facilities,
   };
 
-  console.log(data);
   formData.append("data", JSON.stringify(data));
-  console.log(formData);
 
   const options = {
     method: "POST",
@@ -36,12 +32,9 @@ async function PostEstablishment(uploadData, token) {
     },
   };
 
-  console.log(options);
-
   try {
     const response = await axios(options);
     const data = response.data;
-    console.log(data);
     if (data) {
       return { success: "Success", data: data };
     }
@@ -49,7 +42,7 @@ async function PostEstablishment(uploadData, token) {
       return { failed: "Failed", data: data };
     }
   } catch (error) {
-    console.log("error", error);
+    return { sucess: false, error: error };
   }
 }
 

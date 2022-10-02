@@ -1,74 +1,63 @@
-import React, { useState } from "react";
-import { useForm } from "react-hook-form";
+import React from "react";
+import { Controller } from "react-hook-form";
+import styles from "./inquiry.module.scss";
+import InputsTheme from "components/forms/InputsTheme";
+import Heading from "components/typography/Heading";
+import AlertMessage from "components/forms/AlertMessage";
+
 import Backdrop from "@mui/material/Backdrop";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Fade from "@mui/material/Fade";
-import Heading from "components/typography/Heading";
-import DropDown from "components/forms/Dropdown";
-import RangeDatePicker from "components/forms/RangeDatePicker";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
-import InputsTheme from "components/forms/InputsTheme";
 import TextField from "@mui/material/TextField";
-import schema from "pages/Contact/schemaContact";
-import { yupResolver } from "@hookform/resolvers/yup";
 import InputAdornment from "@mui/material/InputAdornment";
 import ErrorRoundedIcon from "@mui/icons-material/ErrorRounded";
 import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@material-ui/core/FormControl";
+import InputLabel from "@material-ui/core/InputLabel";
+import Select from "@material-ui/core/Select";
+import {
+  ThemeProvider,
+  createTheme,
+  experimental_sx as sx,
+} from "@mui/material/styles";
+import "moment/locale/en-gb";
+import { LocalizationProvider } from "@mui/x-date-pickers-pro";
+import { AdapterMoment } from "@mui/x-date-pickers-pro/AdapterMoment";
+import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
 
-const boxStyle = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  display: "flex",
-  flexDirection: "column",
-  transform: "translate(-50%, -50%)",
-  maxWidth: 500,
-  width: "95%",
-  bgcolor: "background.paper",
-  borderRadius: "12px",
-  gap: 2,
-  boxShadow: 24,
-  p: 4,
-};
-
-const closeStyle = {
-  position: "absolute",
-  right: 15,
-  top: 15,
-  cursor: "pointer",
-};
+const theme = createTheme({
+  shape: {
+    borderRadius: "12px",
+    width: "100%",
+  },
+  components: {
+    MuiTextField: {
+      styleOverrides: {
+        root: sx({
+          width: "100%",
+        }),
+      },
+    },
+  },
+});
 
 const BookingModal = ({
   open,
   onClose,
-  label,
-  dateChange,
-  value,
   title,
-  dropValue,
-  dropChange,
+  register,
+  handleSubmit,
+  errors,
+  control,
+  onSubmit,
+  defaultDates,
+  submitted,
 }) => {
-  const [submitted, setSubmitted] = useState(false);
-
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm({
-    resolver: yupResolver(schema),
-  });
-
-  function onSubmit() {
-    setSubmitted(true);
-    reset();
-  }
   return (
     <div>
       <Modal
-        aria-labelledby="transition-modal-title"
-        aria-describedby="transition-modal-description"
         open={open}
         onClose={onClose}
         closeAfterTransition
@@ -79,12 +68,13 @@ const BookingModal = ({
       >
         <Fade in={open}>
           <Box
-            sx={boxStyle}
+            className={styles.modal}
             component="form"
             onSubmit={handleSubmit(onSubmit)}
+            id="enquiryForm"
             noValidate
           >
-            <CloseRoundedIcon onClick={onClose} sx={closeStyle} />
+            <CloseRoundedIcon onClick={onClose} className={styles.modalClose} />
             <Heading level={3}>Send a booking request for {title}</Heading>
             <InputsTheme>
               <TextField
@@ -134,18 +124,63 @@ const BookingModal = ({
                 maxRows={4}
                 type="text"
                 placeholder="optional"
+                {...register("comment")}
               />
             </InputsTheme>
-            <RangeDatePicker value={value} onChange={dateChange} />
-            <DropDown dropValue={dropValue} dropChange={dropChange} label={label}>
-              <MenuItem value={1}>1 guest</MenuItem>
-              <MenuItem value={2}>2 guests</MenuItem>
-              <MenuItem value={3}>3 guests</MenuItem>
-              <MenuItem value={4}>4 guests</MenuItem>
-            </DropDown>
-            <button type="submit" className="btn">
+            <Controller
+              name="dates"
+              defaultValue={defaultDates}
+              control={control}
+              render={({ field }) => (
+                <LocalizationProvider
+                  dateAdapter={AdapterMoment}
+                  adapterLocale="en-gb"
+                  localeText={{ start: "Chek-in", end: "Checkout" }}
+                >
+                  <DateRangePicker
+                    disablePast
+                    label="dates"
+                    renderInput={(startProps, endProps) => (
+                      <ThemeProvider theme={theme}>
+                        <TextField {...startProps} />
+                        <Box sx={{ mx: 2 }}></Box>
+                        <TextField {...endProps} />
+                      </ThemeProvider>
+                    )}
+                    {...field}
+                  />
+                </LocalizationProvider>
+              )}
+            />
+            <FormControl>
+              <InputLabel id="guests-label">Guests</InputLabel>
+              <Controller
+                render={({ field }) => (
+                  <Select
+                    label="Guests"
+                    sx={{ borderRadius: "12px" }}
+                    {...field}
+                  >
+                    <MenuItem value={1}>1 guest</MenuItem>
+                    <MenuItem value={2}>2 guests</MenuItem>
+                    <MenuItem value={3}>3 guests</MenuItem>
+                    <MenuItem value={4}>4 guests</MenuItem>
+                  </Select>
+                )}
+                name="guests"
+                control={control}
+                defaultValue={1}
+              />
+            </FormControl>
+            <button form="enquiryForm" type="submit" className="btn">
               Send
             </button>
+            {submitted && (
+              <AlertMessage
+                variant="success"
+                message={`Thank you for your booking. ${title} will contact you shortly`}
+              />
+            )}
           </Box>
         </Fade>
       </Modal>

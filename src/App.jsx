@@ -10,7 +10,7 @@ import Establishments from "pages/admin/Establishments";
 import Messages from "pages/admin/Messages";
 import Enquiries from "pages/admin/Enquiries";
 import ScrollToTop from "components/layout/ScrollToTop";
-import { BASE_URL, ESTABLISHMENTS, POPULATE_ALL } from "utils/api";
+import { BASE_URL, ESTABLISHMENTS, POPULATE_ALL } from "constants/apiKeys";
 import useApi from "utils/useApi";
 import { AuthProvider } from "utils/AuthContext";
 

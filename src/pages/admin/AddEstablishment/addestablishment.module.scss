@@ -1,6 +1,6 @@
 @import "../../../sass//partials/variables";
 
-.addestablishment__container {
+.container {
   display: flex;
   flex-direction: column;
   max-width: 800px;
@@ -20,21 +20,7 @@
   }
 }
 
-//Add Address
-.pac-container {
-  font-family: $font-primary;
-  border-radius: $border-radius-primary;
-}
-.pac-item,
-.pac-item-query {
-  color: $color-dark;
-  padding: 0.7em;
-}
-.pac-item:hover {
-  background: $color-background;
-}
-
-.breakfast-star__container {
+.breakfaststarContainer {
   display: flex;
   flex-direction: column;
 
@@ -45,7 +31,7 @@
 }
 
 //Add Facilities
-.add__facilities {
+.addFacilities {
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -54,7 +40,7 @@
   background: white;
   position: relative;
 
-  &--expand {
+  &Expand {
     display: flex;
     align-items: center;
     gap: 0.9em;
@@ -70,17 +56,17 @@
   }
 }
 
-.add__facilities--show {
+.addFacilitiesShow {
   max-height: 100%;
 }
 
 //Add images
-.add__images--container {
+.addImagesContainer {
   display: flex;
   flex-direction: column;
 }
 
-.remove__image {
+.removeImage {
   position: absolute;
   bottom: 0;
   width: 100%;
@@ -98,8 +84,34 @@
   }
 }
 
-.remove__image--all {
+.removeImageAll {
   margin: 0.2em 0;
   cursor: pointer;
   align-self: flex-end;
+}
+
+.thumbsContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  border-radius: $border-radius-primary;
+}
+
+.thumb {
+  display: inline-flex;
+  margin-right: 8px;
+  margin-bottom: 8px;
+  width: 100px;
+  height: 100px;
+  position: relative;
+  border-radius: $border-radius-primary;
+}
+
+.thumbInner {
+  overflow: hidden;
+  border-radius: $border-radius-primary;
+}
+
+.img {
+  height: 100%;
 }

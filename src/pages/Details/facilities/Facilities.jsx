@@ -1,6 +1,7 @@
 import React from "react";
-import Heading from "components/typography/Heading";
+import styles from "./facilities.module.scss";
 import FacilityIcon from "./FacilityIcon";
+import Heading from "components/typography/Heading";
 
 function Facilities({ heading, facilities }) {
   const facilitiesArray = facilities;
@@ -12,11 +13,11 @@ function Facilities({ heading, facilities }) {
       {noFacilities ? (
         <span>No Facilities available</span>
       ) : (
-        <div className="facilities">
+        <div className={styles.facilities}>
           {facilitiesArray.map((facility) => {
             const { name, tags } = facility.attributes;
             return (
-              <div key={facility.id} className="facilities__item">
+              <div key={facility.id} className={styles.facilitiesItem}>
                 <FacilityIcon tags={[tags]} />
                 <span>{name}</span>
               </div>

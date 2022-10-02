@@ -1,0 +1,15 @@
+@import "../../../sass/partials/variables";
+
+.guestsIcon {
+  display: flex;
+  align-items: center;
+  gap: 0.4em;
+  border: 1px solid $color-grey;
+  border-radius: $border-radius-primary;
+  padding: 0.5em;
+  width: fit-content;
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  font-weight: bold;
+}

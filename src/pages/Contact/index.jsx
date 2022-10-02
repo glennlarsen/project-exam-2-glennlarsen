@@ -1,16 +1,14 @@
 import React from "react";
-import "./contact.scss";
-import Layout from "components/layout/Layout";
-import OuterContainer from "../../components/layout/OuterContainer";
-import Head from "../../components/layout/Head";
-import Header from "components/layout/Header";
+import ContactForm from "./ContactForm";
 import contactBackground from "./contact-background.jpg";
+import Layout from "components/layout/Layout";
+import OuterContainer from "components/layout/OuterContainer";
+import Head from "components/layout/Head";
+import Header from "components/layout/Header";
 import Heading from "components/typography/Heading";
 import SocialMedia from "components/SocialMedia";
-import ContactForm from "./ContactForm";
 
 function Contact() {
-
   return (
     <Layout>
       <Head
@@ -29,9 +27,10 @@ function Contact() {
             </a>
             <SocialMedia size={40} borderColor={"#17396D"} color={"#17396D"} />
           </div>
-          <ContactForm />
         </Header>
-        <main className="main-contact"></main>
+        <main>
+          <ContactForm />
+        </main>
       </OuterContainer>
     </Layout>
   );

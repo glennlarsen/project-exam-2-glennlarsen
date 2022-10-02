@@ -1,4 +1,4 @@
-import { BASE_URL, MESSAGES } from "utils/api";
+import { BASE_URL, MESSAGES } from "constants/apiKeys";
 import axios from "axios";
 
 async function PostMessage(data) {
@@ -11,9 +11,7 @@ async function PostMessage(data) {
     message: data.message,
   };
 
-  console.log(data);
   formData.append("data", JSON.stringify(newMessage));
-  console.log(formData);
 
   const options = {
     method: "POST",
@@ -21,12 +19,10 @@ async function PostMessage(data) {
     url: BASE_URL + MESSAGES,
   };
 
-  console.log(options);
-
   try {
     const response = await axios(options);
     const data = response.data;
-    console.log(data);
+
     if (data) {
       return { success: "Success", data: data };
     }
@@ -34,7 +30,7 @@ async function PostMessage(data) {
       return { failed: "Failed", data: data };
     }
   } catch (error) {
-    console.log("error", error);
+    return { sucess: false, error: error };
   }
 }
 

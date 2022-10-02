@@ -1,18 +1,25 @@
-import React, { useState} from "react";
+import React from "react";
+import { Link } from "react-router-dom";
+import styles from "./listings.module.scss";
 import Heading from "../typography/Heading";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
-import tripadvisor from "./tripadvisor-blue-logo.png";
-import { Link } from "react-router-dom";
+import { Icon } from "@iconify/react";
 
 function Card({ establishments, numberOfCards, loading, type }) {
   const category = type;
   const accommodations = establishments;
-    const filteredEstablishments = accommodations.filter((item) => item.attributes.type.toLowerCase().includes(category))
+  const filteredEstablishments = accommodations.filter((item) =>
+    item.attributes.type.toLowerCase().includes(category)
+  );
 
-    if (category && filteredEstablishments.length === 0) {
-      return <div style={{height: "130px", marginTop: "13em"}}>No listings in this category available</div>
-    }
+  if (category && filteredEstablishments.length === 0) {
+    return (
+      <div style={{ height: "130px", marginTop: "13em" }}>
+        No listings in this category available
+      </div>
+    );
+  }
 
   return (
     <>
@@ -29,20 +36,32 @@ function Card({ establishments, numberOfCards, loading, type }) {
           }
 
           return (
-            <Link key={item.id} to={`details/${item.id}`} className="card">
-              <div className="card__image">
-                <img src={image ? image : "https://via.placeholder.com/600"} alt={title} />
-                <div className="card__title">
+            <Link
+              key={item.id}
+              to={`details/${item.id}`}
+              className={styles.card}
+            >
+              <div className={styles.cardImage}>
+                <img
+                  src={image ? image : "https://via.placeholder.com/600"}
+                  alt={title}
+                />
+                <div className={styles.cardTitle}>
                   <Heading level={3}>{title}</Heading>
                 </div>
               </div>
-              <div className="card__details">
+              <div className={styles.cardDetails}>
                 <span>{price} NOK per day</span>
                 <div>{numberOfStars}</div>
                 <p>{address}</p>
-                <div className="card__circle">
-                  <img src={tripadvisor} alt="tripadvisor Logo" />
-                  {rating.toFixed(1)}
+                <div className={styles.cardCircle}>
+                  <Icon
+                    icon="entypo-social:tripadvisor"
+                    color="#3474d4"
+                    width="35"
+                    height="35"
+                  />
+                  <span>{rating.toFixed(1)}</span>
                 </div>
               </div>
             </Link>

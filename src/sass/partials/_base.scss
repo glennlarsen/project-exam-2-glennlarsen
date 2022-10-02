@@ -18,3 +18,13 @@ main {
   align-items: center;
 }
 
+/*Loader from react loaders*/
+.ball-clip-rotate > div {
+  width: 60px;
+  height: 60px;
+}
+
+.MuiMenuItem-root:hover {
+  background: $color-background !important;
+}
+

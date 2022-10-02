@@ -1,0 +1,23 @@
+.details {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 0 1em;
+
+  @media screen and (min-width: 830px) {
+    padding: 0;
+  }
+}
+
+.detailsInfo {
+  display: flex;
+  flex-direction: column;
+
+  @media screen and (min-width: 830px) {
+    flex-direction: row;
+
+    & > :first-child {
+      flex: 2;
+    }
+  }
+}

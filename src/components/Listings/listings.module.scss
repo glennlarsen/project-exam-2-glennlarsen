@@ -1,7 +1,7 @@
 @import "../../sass//partials/shapes";
 @import "../../sass//partials/variables";
 
-.background-box {
+.backgroundBox {
   background-color: transparent;
   border-radius: 30px;
   width: 100%;
@@ -16,7 +16,7 @@
   }
 }
 
-.listings-grid {
+.listingsGrid {
   width: 100%;
   max-width: 1190px;
   margin-top: -5em;
@@ -55,7 +55,7 @@
   }
 }
 
-.card__image {
+.cardImage {
   background: linear-gradient(
     0deg,
     rgba(245, 245, 245, 0) 40%,
@@ -65,7 +65,7 @@
   position: relative;
 }
 
-.card__image img {
+.cardImage img {
   max-height: 150px;
   object-fit: cover;
   width: 100%;
@@ -73,7 +73,7 @@
   position: relative;
 }
 
-.card__title {
+.cardTitle {
   padding: 0 1em;
   position: absolute;
   top: 0;
@@ -81,7 +81,7 @@
   text-shadow: 3px 2px 5px rgb(0 0 0 / 70%);
 }
 
-.card__details {
+.cardDetails {
   padding: 1em;
   position: relative;
   white-space: nowrap;
@@ -109,10 +109,14 @@
   }
 }
 
-.card__circle {
+.cardCircle {
   @include circle($borderColor: $color-secondary);
   position: absolute;
   bottom: 15px;
   right: 15px;
   font-weight: bold;
+
+  span {
+    margin-top: -5px;
+  }
 }

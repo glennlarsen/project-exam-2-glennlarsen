@@ -1,11 +1,11 @@
 import PropTypes from "prop-types";
 
 const Paragraph = ({ children, fontSize, color, textWidth }) => {
-    const Style = {
-        fontSize: fontSize + "rem", 
-        color: color, 
-        maxWidth: textWidth,
-    }
+  const Style = {
+    fontSize: fontSize + "rem",
+    color: color,
+    maxWidth: textWidth,
+  };
 
   return <p style={Style}>{children}</p>;
 };

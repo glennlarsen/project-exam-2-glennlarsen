@@ -1,15 +1,16 @@
 import React, { useState } from "react";
+import styles from "./map.module.scss";
 import GoogleMapReact from "google-map-react";
 import mapIcon from "./map-icon.svg";
 import Heading from "components/typography/Heading";
-import { MAPS_KEY } from "utils/api";
+import { MAPS_KEY } from "constants/apiKeys";
 import Geocode from "react-geocode";
-import { GEOCODING_KEY } from "utils/api";
+import { GEOCODING_KEY } from "constants/apiKeys";
 
 const LocationPin = ({ text }) => (
-  <div className="pin">
-    <img src={mapIcon} className="pin-icon" />
-    <p className="pin-text">{text}</p>
+  <div className={styles.pin}>
+    <img src={mapIcon} />
+    <p className={styles.pinText}>{text}</p>
   </div>
 );
 
@@ -37,11 +38,11 @@ const Map = ({ location, heading, zoomLevel }) => {
     lng: lng,
   };
   return (
-    <div className="map" id="map">
-      <div className="map__heading">
-      <Heading level={2}>{heading}</Heading>
+    <div className={styles.map} id="map">
+      <div className={styles.mapHeading}>
+        <Heading level={2}>{heading}</Heading>
       </div>
-      <div className="google-map">
+      <div className={styles.googleMap}>
         <GoogleMapReact
           bootstrapURLKeys={{ key: MAPS_KEY }}
           center={coorrdinates}

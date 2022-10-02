@@ -1,30 +1,19 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import styles from "./contactForm.module.scss";
+import schemaContact from "./schemaContact";
+import PostMessage from "utils/PostMessage";
+import InputsTheme from "components/forms/InputsTheme";
+import Heading from "components/typography/Heading";
+import MyLoader from "components/layout/MyLoader";
+import AlertMessage from "components/forms/AlertMessage";
+
+import { yupResolver } from "@hookform/resolvers/yup";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import InputsTheme from "components/forms/InputsTheme";
 import SendRoundedIcon from "@mui/icons-material/SendRounded";
-import Heading from "components/typography/Heading";
-import { yupResolver } from "@hookform/resolvers/yup";
 import InputAdornment from "@mui/material/InputAdornment";
 import ErrorRoundedIcon from "@mui/icons-material/ErrorRounded";
-import schemaContact from "pages/Contact/schemaContact";
-import PostMessage from "utils/PostMessage";
-import MyLoader from "components/layout/MyLoader";
-import Alert from '@mui/material/Alert';
-
-const boxStyle = {
-  display: "flex",
-  flexDirection: "column",
-  maxWidth: 800,
-  width: "95%",
-  bgcolor: "background.paper",
-  borderRadius: "12px",
-  gap: 2,
-  boxShadow: 24,
-  p: 4,
-  margin: "0 auto",
-};
 
 function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
@@ -56,18 +45,22 @@ function ContactForm() {
   }
 
   if (loading) {
-    return (
-        <MyLoader centered="100vh"> Sending, please wait...</MyLoader>
-    );
+    return <MyLoader centered="100vh"> Sending, please wait...</MyLoader>;
   }
 
   if (error) {
-    return <div>An error occured</div>;
+    return (
+      <AlertMessage
+        variant="error"
+        title="Error"
+        message="An error occured, Please try again later"
+      />
+    );
   }
 
   return (
     <Box
-      sx={boxStyle}
+      className={styles.contactForm}
       component="form"
       onSubmit={handleSubmit(onSubmit)}
       noValidate
@@ -170,7 +163,13 @@ function ContactForm() {
           }
         />
       </InputsTheme>
-      {submitted && ( <Alert severity="success">Thank you for your message. We will get back to you shortly.</Alert> )}
+      {submitted && (
+        <AlertMessage
+          variant="success"
+          title="Sent!"
+          message="Thank you for your message. We will get back to you shortly."
+        />
+      )}
       <button type="submit" className="btn btn-form">
         Send
       </button>

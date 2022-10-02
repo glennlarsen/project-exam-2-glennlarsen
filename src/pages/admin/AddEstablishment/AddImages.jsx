@@ -1,41 +1,8 @@
 import React, { useEffect, useState, useMemo, useCallback } from "react";
+import styles from "./addestablishment.module.scss";
 import { useDropzone } from "react-dropzone";
 import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
 import Tooltip from "@mui/material/Tooltip";
-
-const thumbsContainer = {
-  display: "flex",
-  flexDirection: "row",
-  flexWrap: "wrap",
-  marginTop: 16,
-  borderRadius: 12,
-};
-
-const thumb = {
-  display: "inline-flex",
-  borderRadius: 2,
-  border: "1px solid #eaeaea",
-  marginBottom: 8,
-  marginRight: 8,
-  width: 100,
-  height: 100,
-  boxSizing: "border-box",
-  position: "relative",
-  borderRadius: 12,
-};
-
-const thumbInner = {
-  display: "flex",
-  minWidth: 0,
-  overflow: "hidden",
-  borderRadius: 12,
-};
-
-const img = {
-  display: "block",
-  width: "auto",
-  height: "100%",
-};
 
 const baseStyle = {
   flex: 1,
@@ -92,7 +59,6 @@ function AddImages({ name, id, setValue, errors }) {
     getInputProps,
     isFocused,
     fileRejections,
-    onError,
     isDragAccept,
     isDragReject,
   } = useDropzone({
@@ -140,18 +106,18 @@ function AddImages({ name, id, setValue, errors }) {
   );
 
   const thumbs = files.map((file) => (
-    <div style={thumb} key={file.name}>
-      <div style={thumbInner}>
+    <div className={styles.thumb} key={file.name}>
+      <div className={styles.thumbInner}>
         <img
           src={file.preview}
-          style={img}
+          className={styles.img}
           // Revoke data uri after image is loaded
           onLoad={() => {
             URL.revokeObjectURL(file.preview);
           }}
         />
       </div>
-      <button className="remove__image" onClick={removeFile(file)}>
+      <button className={styles.removeImage} onClick={removeFile(file)}>
         Remove
       </button>
     </div>
@@ -163,7 +129,7 @@ function AddImages({ name, id, setValue, errors }) {
   }, []);
 
   return (
-    <section className="add__images--container">
+    <section className={styles.addImagesContainer}>
       <div {...getRootProps({ style })}>
         <input {...getInputProps()} name={name} id={id} multiple />
         <p>Drop images here, or click to select images</p>
@@ -172,12 +138,12 @@ function AddImages({ name, id, setValue, errors }) {
       {files.length > 0 ? (
         <Tooltip title="Remove All">
           <DeleteRoundedIcon
-            className="remove__image--all"
+            className={styles.removeImageAll}
             onClick={removeAll}
           />
         </Tooltip>
       ) : null}
-      <aside style={thumbsContainer}>
+      <aside className={styles.thumbsContainer}>
         {thumbs}
         <ul className="errors">{fileRejectionItems}</ul>{" "}
         {errors.images ? (

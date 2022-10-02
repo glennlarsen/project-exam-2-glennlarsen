@@ -1,48 +1,54 @@
 import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { Controller } from "react-hook-form";
+import styles from "./addestablishment.module.scss";
+import schemaAddEstablishment from "./schemaAddEstablishment";
+import AddressAutoComplete from "./AddressAutoComplete";
+import AddStarRating from "./AddStarRating";
+import BreakfastIncluded from "./BreakfastIncluded";
+import AddImages from "./AddImages";
+import PostEstablishment from "utils/PostEstablishment";
+import AuthContext from "utils/AuthContext";
+import useApi from "utils/useApi";
+import { BASE_URL, FACILITIES } from "constants/apiKeys";
+
 import Layout from "components/layout/Layout";
 import OuterContainer from "components/layout/OuterContainer";
 import Head from "components/layout/Head";
 import Heading from "components/typography/Heading";
 import AdminHeader from "components/admin/AdminHeader";
+import AlertMessage from "components/forms/AlertMessage";
+import InputsTheme from "components/forms/InputsTheme";
+import MyLoader from "components/layout/MyLoader";
+import ReactHookFormSelect from "components/forms/ReactHookFormSelect";
+
+import { yupResolver } from "@hookform/resolvers/yup";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import InputsTheme from "components/forms/InputsTheme";
 import InputAdornment from "@mui/material/InputAdornment";
 import ErrorRoundedIcon from "@mui/icons-material/ErrorRounded";
-import "./addestablishment.scss";
 import MenuItem from "@mui/material/MenuItem";
-import { Controller } from "react-hook-form";
 import FormControl from "@material-ui/core/FormControl";
 import FormGroup from "@mui/material/FormGroup";
-import AddStarRating from "./AddStarRating";
-import BreakfastIncluded from "./BreakfastIncluded";
-import AddImages from "./AddImages";
-import AuthContext from "utils/AuthContext";
-import { yupResolver } from "@hookform/resolvers/yup";
-import MyLoader from "components/layout/MyLoader";
-import PostEstablishment from "utils/PostEstablishment";
-import ReactHookFormSelect from "components/forms/ReactHookFormSelect";
-import AddressAutoComplete from "./AddressAutoComplete";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
 import Grid from "@mui/material/Unstable_Grid2";
-import useApi from "utils/useApi";
-import { BASE_URL, FACILITIES } from "utils/api";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import schemaAddEstablishment from "./schemaAddEstablishment";
-import Alert from '@mui/material/Alert';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
 
 const AddEstablishment = () => {
+  const [auth] = useContext(AuthContext);
+  const navigate = useNavigate();
+  if (!auth) {
+    navigate("/login");
+  }
+
   const [loading, setLoading] = useState(false);
   const [created, setCreated] = useState(false);
   const [error, setError] = useState(false);
-  const [auth] = useContext(AuthContext);
   const addressRef = AddressAutoComplete();
-
   const url = BASE_URL + FACILITIES;
   const { facilities } = useApi(url);
   const [showAllFacilities, setShowAllFacilities] = useState(false);
@@ -51,23 +57,14 @@ const AddEstablishment = () => {
     setShowAllFacilities((current) => !current);
   };
 
-  const navigate = useNavigate();
-  if (!auth) {
-    navigate("/login");
-  }
-
   const {
     register,
     handleSubmit,
     reset,
     control,
     setValue,
-    watch,
     formState: { errors },
   } = useForm({ resolver: yupResolver(schemaAddEstablishment) });
-
-  const watchAllFields = watch();
-  console.log(watchAllFields);
 
   async function onSubmit(data) {
     const createEstablishment = window.confirm(
@@ -77,15 +74,14 @@ const AddEstablishment = () => {
     if (createEstablishment) {
       setLoading(true);
       const create = await PostEstablishment(data, auth.jwt);
-      console.log("upload succes:", create.success);
       if (create.success) {
         setLoading(false);
         setCreated(true);
         reset();
         setTimeout(() => {
-        navigate("/establishments");
-        window.location.reload(true);
-      }, 3000);
+          navigate("/establishments");
+          window.location.reload(true);
+        }, 3000);
       }
       if (!create) {
         setLoading(false);
@@ -97,19 +93,28 @@ const AddEstablishment = () => {
 
   if (loading) {
     return (
-        <MyLoader centered="100vh"> It may take a few seconds to upload the images, please wait...</MyLoader>
+      <MyLoader height="100vh">
+        {" "}
+        It may take a few seconds to upload the images, please wait...
+      </MyLoader>
     );
   }
 
   if (error) {
-    return <div>An error occured</div>;
+    return (
+      <AlertMessage
+        variant="error"
+        title="Error"
+        message="An error occured, Please try again later"
+      />
+    );
   }
 
   return (
     <Layout>
       <Head
-        page="Admin - Enquiries"
-        description="Holidaze Admin - Received Enquiries from your establishments"
+        page="Admin - Add Establishment"
+        description="Holidaze Admin - Add a new establishment to your collection"
       />
       <OuterContainer>
         <AdminHeader
@@ -120,12 +125,18 @@ const AddEstablishment = () => {
         />
         <InputsTheme>
           <Box
-            className="addestablishment__container"
+            className={styles.container}
             component="form"
             onSubmit={handleSubmit(onSubmit)}
             noValidate
           >
-            {created && ( <Alert severity="success">Establishment successfully created! Redirecting you to establishments now...</Alert> )}
+            {created && (
+              <AlertMessage
+                variant="success"
+                message="Establishment successfully created! Redirecting you to
+              establishments now..."
+              />
+            )}
             <Heading level={2}>Details</Heading>
             <TextField
               label={"Title"}
@@ -237,7 +248,7 @@ const AddEstablishment = () => {
                   : null
               }
             />
-            <div className="breakfast-star__container">
+            <div className={styles.breakfaststarContainer}>
               <BreakfastIncluded
                 control={control}
                 name="breakfast"
@@ -296,8 +307,8 @@ const AddEstablishment = () => {
             />
             <FormGroup
               className={`${
-                showAllFacilities ? "add__facilities--show" : ""
-              } add__facilities`}
+                showAllFacilities ? styles.addFacilitiesShow : ""
+              } ${styles.addFacilities}`}
             >
               <Heading level={2}>Facilities</Heading>
               <Grid container columns={{ xs: 4, sm: 8, md: 12 }}>
@@ -320,7 +331,7 @@ const AddEstablishment = () => {
             </FormGroup>
             {!showAllFacilities ? (
               <span
-                className="add__facilities--expand"
+                className={styles.addFacilitiesExpand}
                 onClick={toogleAllFacilities}
               >
                 <FontAwesomeIcon icon={faChevronDown} size="1x" />
@@ -328,7 +339,7 @@ const AddEstablishment = () => {
               </span>
             ) : (
               <span
-                className="add__facilities--expand"
+                className={styles.addFacilitiesExpand}
                 onClick={toogleAllFacilities}
               >
                 <FontAwesomeIcon icon={faChevronUp} size="1x" />

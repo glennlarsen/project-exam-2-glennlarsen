@@ -1,0 +1,22 @@
+.contactForm {
+  display: flex;
+  flex-direction: column;
+  max-width: 800px;
+  width: 95%;
+  background-color: white;
+  border-radius: 12px;
+  gap: 1em;
+  box-shadow: rgb(145 158 171 / 20%) 0px 2px 2px 0px,
+    rgb(145 158 171 / 30%) 0px 10px 30px -2px;
+  padding: 2em;
+  margin: 0 auto;
+  margin-bottom: 4em;
+  margin-top: -12em;
+  z-index: 20;
+}
+
+h2 svg {
+  @media screen and (min-width: 830px) {
+    font-size: 2rem !important;
+  }
+}
