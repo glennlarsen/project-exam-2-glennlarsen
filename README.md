@@ -2,7 +2,7 @@
 ![screenshot](assets/screenshot.png)
 
 ## Description
-Holidaze is a local tourism agency in Bergen which lists hotels, B&Bs and guesthouses for visitors in the area. The accommodation owners will receive enquiries through a booking form for an choosen accommodation. 
+Holidaze is a local tourism agency in Bergen which lists hotels, B&Bs and guesthouses for visitors in the area. The accommodation owners will receive enquiries through a booking form for a choosen accommodation. 
 
 The project has a visitor side for users searching for accommodation and making enquiries, sa well as an administration side where accommodation owners can add/delete establishments and manage enquiries. The admin for Holidaze will also receive messages from a contact form for general questions. 
 
