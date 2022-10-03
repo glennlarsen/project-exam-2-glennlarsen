@@ -1,75 +1,48 @@
-### `Admin Login`
+# Holidaze - Hotel Booking Website
+![screenshot](assets/screenshot.png)
 
-User: admin
-Password: 12345678
+## Description
+Holidaze is a local tourism agency in Bergen which lists hotels, B&Bs and guesthouses for visitors in the area. The accommodation owners will receive enquiries through a booking form for an choosen accommodation. 
 
-# Getting Started with Create React App
+The project has a visitor side for users searching for accommodation and making enquiries, sa well as an administration side where accommodation owners can add/delete establishments and manage enquiries. The admin for Holidaze will also receive messages from a contact form for general questions. 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The project is setup with a rest API on Strapi where the establishments, messages and enquiries are stored. Users and facilities for the accommodations are also stored on the API. 
 
-## Available Scripts
+* Visitor side
+* Admin side
+* Strapi rest API
 
-In the project directory, you can run:
+## Built With
+* React.js
+* SCSS
+* Material UI
+* Strapi
+* Google maps API
 
-### `npm start`
+## Getting Started
+### Installing
+1. Clone the repo:
+`git clone https://github.com/glennlarsen/project-exam-2-glennlarsen.git`
+Clones the repo to your choosen destination.
 
+2. Install the dependencies:
+`npm install`
+Install's all the required dependencies to run the project.
+
+### Running
+`npm run start`
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Admin Login
+User: admin
+Password: 12345678
+Admin user login to enter the admin side.
 
-### `npm test`
+## Contributing
+Contributions to the project are very much appreaciated. To contribute please open a pull request so the code can be reviewed.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Contact
+[My LinkedIn Page](https://www.linkedin.com/in/glenn-larsen-288173242/)
+[My Facebook Page](https://www.facebook.com/glenn.larsen.96)
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
