@@ -39,6 +39,10 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 `Password: 12345678`\
 Admin user login to enter the admin side.
 
+### Live Site
+The website is deployed on netlify by using `npm run build` and add the build folder to the deploy section on Netlify. 
+[Link to live site](https://chic-croquembouche-ac3466.netlify.app/)
+
 ## Contributing
 Contributions to the project are very much appreaciated. To contribute please open a pull request so the code can be reviewed.
 
