@@ -5,6 +5,8 @@ import Heading from "../typography/Heading";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { Icon } from "@iconify/react";
+import Skeleton from "@mui/material/Skeleton";
+import Box from "@mui/material/Box";
 
 function Card({ establishments, numberOfCards, loading, type }) {
   const category = type;
@@ -12,6 +14,37 @@ function Card({ establishments, numberOfCards, loading, type }) {
   const filteredEstablishments = accommodations.filter((item) =>
     item.attributes.type.toLowerCase().includes(category)
   );
+
+  if (loading) {
+    return Array.from(new Array(numberOfCards)).map((skeletonItem, index) => (
+      <Box key={index} sx={{ width: "90%" }}>
+        <Skeleton height={250} sx={{ marginTop: "-45px" }} />
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            marginTop: "-35px",
+            marginBottom: "40px",
+          }}
+        >
+          <div className={styles.skeletonText}>
+            <Skeleton width="50%" />
+            <Skeleton width="30%" />
+            <Skeleton width="80%" />
+          </div>
+          <div>
+            <Skeleton
+              animation="wave"
+              variant="circular"
+              width={60}
+              height={60}
+            />
+          </div>
+        </Box>
+      </Box>
+    ));
+  }
 
   if (category && filteredEstablishments.length === 0) {
     return (
@@ -51,7 +84,9 @@ function Card({ establishments, numberOfCards, loading, type }) {
                 </div>
               </div>
               <div className={styles.cardDetails}>
-                <span>{price} NOK per day</span>
+                <span>
+                  {price.toLocaleString().replace(/,/g, " ")} NOK per day
+                </span>
                 <div>{numberOfStars}</div>
                 <p>{address}</p>
                 <div className={styles.cardCircle}>

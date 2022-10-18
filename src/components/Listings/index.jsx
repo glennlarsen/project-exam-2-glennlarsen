@@ -1,12 +1,10 @@
 import React from "react";
 import styles from "./listings.module.scss";
 import Card from "./Card";
-import MyLoader from "components/layout/MyLoader";
 import { Mobile, Tablet, Desktop } from "components/layout/ScreenViewSize";
 import AlertMessage from "components/forms/AlertMessage";
 
 function Listings({
-  numberOfCards,
   MobileAndDesktopNumberOfCards,
   tabletNumberOfCards,
   establishments,
@@ -14,10 +12,6 @@ function Listings({
   error,
   type,
 }) {
-  if (loading) {
-    return <MyLoader>Loading Accommodations, Please wait...</MyLoader>;
-  }
-
   if (error) {
     return (
       <AlertMessage
@@ -31,12 +25,6 @@ function Listings({
   return (
     <div className={styles.backgroundBox}>
       <div className={styles.listingsGrid}>
-        <Card
-          establishments={establishments}
-          numberOfCards={numberOfCards}
-          loading={loading}
-          type={type}
-        />
         <Mobile>
           <Card
             establishments={establishments}

@@ -51,6 +51,7 @@ function Home({ establishments, loading, error }) {
               error={error}
               MobileAndDesktopNumberOfCards={3}
               tabletNumberOfCards={2}
+              type="hotel"
             />
           </div>
         </main>

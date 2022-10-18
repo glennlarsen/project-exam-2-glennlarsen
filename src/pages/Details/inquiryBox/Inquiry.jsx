@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 
 import styles from "./inquiry.module.scss";
@@ -9,6 +9,7 @@ import AlertMessage from "components/forms/AlertMessage";
 import FloatingContact from "./StickyBookButton";
 import BookingModal from "./BookingModal";
 
+import moment from "moment";
 import { HideOn } from "react-hide-on-scroll";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
@@ -30,6 +31,10 @@ import "moment/locale/en-gb";
 import { LocalizationProvider } from "@mui/x-date-pickers-pro";
 import { AdapterMoment } from "@mui/x-date-pickers-pro/AdapterMoment";
 import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableRow from "@mui/material/TableRow";
 
 const theme = createTheme({
   shape: {
@@ -48,14 +53,15 @@ const theme = createTheme({
 });
 
 const Inquiry = ({ price, tripLink, stars, rating, breakfast, title, id }) => {
-  const todaysDate = new Date();
-  const tomorrowsDate = new Date(todaysDate);
-  tomorrowsDate.setDate(tomorrowsDate.getDate() + 1);
+  const todaysDate = moment().endOf("day");
+  const tomorrowsDate = moment().add(1, "day").endOf("day");
   const [defaultDates] = useState([todaysDate, tomorrowsDate]);
+  const [days, setDays] = useState(1);
   const [open, setOpen] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+  const totalPrice = days*price;
 
   const handleOpen = (event) => {
     setOpen(true);
@@ -73,7 +79,15 @@ const Inquiry = ({ price, tripLink, stars, rating, breakfast, title, id }) => {
     resolver: yupResolver(schemaEnquiry),
   });
 
-  console.log(watch());
+  useEffect(() => {
+    return () => {
+      const dates = watch("dates");
+      const checkinDate = dates[0];
+      const checkoutDate = dates[1];
+      const days = checkoutDate ? checkoutDate.diff(checkinDate, "days") : 0;
+      setDays(days);
+    };
+  }, [watch("dates")]);
 
   // Function that will run when form is submitted
   async function onSubmit(data) {
@@ -83,7 +97,7 @@ const Inquiry = ({ price, tripLink, stars, rating, breakfast, title, id }) => {
 
     if (sendEnquiry) {
       setLoading(true);
-      const enquiry = await PostEnquiry(data, id);
+      const enquiry = await PostEnquiry(data, id, totalPrice, days);
       if (enquiry.success) {
         setLoading(false);
         setSubmitted(true);
@@ -118,8 +132,10 @@ const Inquiry = ({ price, tripLink, stars, rating, breakfast, title, id }) => {
       <div className={styles.inquiryBox} id="inquiryBox">
         <div className={styles.inquiryBoxHeader}>
           <span>
-            <span className={styles.inquiryBoxPrice}>From {price} NOK</span> per
-            night
+            <span className={styles.inquiryBoxPrice}>
+              From {price.toLocaleString().replace(/,/g, " ")} NOK
+            </span>{" "}
+            per night
           </span>
           <div>{numberOfStars}</div>
           <span className={styles.inquiryBoxBreakfast}>
@@ -189,6 +205,39 @@ const Inquiry = ({ price, tripLink, stars, rating, breakfast, title, id }) => {
         <button className="btn" onClick={handleOpen}>
           Book
         </button>
+        <Table aria-label="price table">
+          <TableBody>
+            <TableRow>
+              <TableCell component="th" scope="row">
+                {price.toLocaleString().replace(/,/g, " ")} NOK x {days} Nights
+              </TableCell>
+              <TableCell align="right">
+                {(days * price).toLocaleString().replace(/,/g, " ")} NOK
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell
+                sx={{
+                  fontWeight: "bold",
+                  borderBottom: "none",
+                  fontSize: "1rem",
+                }}
+              >
+                Total
+              </TableCell>
+              <TableCell
+                align="right"
+                sx={{
+                  fontWeight: "bold",
+                  borderBottom: "none",
+                  fontSize: "1rem",
+                }}
+              >
+                {(days * price).toLocaleString().replace(/,/g, " ")} NOK
+              </TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
         <HideOn divID="map">
           <FloatingContact
             onClick={handleOpen}
@@ -207,6 +256,8 @@ const Inquiry = ({ price, tripLink, stars, rating, breakfast, title, id }) => {
           title={title}
           onSubmit={onSubmit}
           submitted={submitted}
+          days={days}
+          price={price}
         />
       </div>
     </div>

@@ -26,6 +26,10 @@ import "moment/locale/en-gb";
 import { LocalizationProvider } from "@mui/x-date-pickers-pro";
 import { AdapterMoment } from "@mui/x-date-pickers-pro/AdapterMoment";
 import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableRow from "@mui/material/TableRow";
 
 const theme = createTheme({
   shape: {
@@ -47,6 +51,8 @@ const BookingModal = ({
   open,
   onClose,
   title,
+  days,
+  price,
   register,
   handleSubmit,
   errors,
@@ -175,6 +181,39 @@ const BookingModal = ({
             <button form="enquiryForm" type="submit" className="btn">
               Send
             </button>
+            <Table aria-label="price table">
+          <TableBody>
+            <TableRow>
+              <TableCell component="th" scope="row">
+                {price.toLocaleString().replace(/,/g, " ")} NOK x {days} Nights
+              </TableCell>
+              <TableCell align="right">
+                {(days * price).toLocaleString().replace(/,/g, " ")} NOK
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell
+                sx={{
+                  fontWeight: "bold",
+                  borderBottom: "none",
+                  fontSize: "1rem",
+                }}
+              >
+                Total
+              </TableCell>
+              <TableCell
+                align="right"
+                sx={{
+                  fontWeight: "bold",
+                  borderBottom: "none",
+                  fontSize: "1rem",
+                }}
+              >
+                {(days * price).toLocaleString().replace(/,/g, " ")} NOK
+              </TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
             {submitted && (
               <AlertMessage
                 variant="success"

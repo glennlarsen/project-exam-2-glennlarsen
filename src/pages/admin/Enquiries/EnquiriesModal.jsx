@@ -7,7 +7,8 @@ import Modal from "@mui/material/Modal";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 
 const EnquiriesModal = ({ open, onClose, data, formatDate }) => {
-  const { name, email, checkin, checkout, guests, comment } = data.attributes;
+  const { name, email, checkin, checkout, guests, comment, price, days } = data.attributes;
+  console.log(data)
   const establishment = data.attributes.establishment.data.attributes.title;
 
   return (
@@ -35,6 +36,10 @@ const EnquiriesModal = ({ open, onClose, data, formatDate }) => {
           <span>
             <span className="admin-card__property">Guests: </span>
             {guests}
+          </span>
+          <span>
+            <span className="admin-card__property">Totalprice: </span>
+            {parseInt(price).toLocaleString().replace(/,/g, " ")} NOK ({days} Nights)
           </span>
           <Paragraph>
             <span className="admin-card__property">Comment: </span>

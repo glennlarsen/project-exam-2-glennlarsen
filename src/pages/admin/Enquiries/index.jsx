@@ -47,8 +47,6 @@ function Enquiries() {
   const [read, setRead] = UseLocalStorage("readEnq", []);
   const [filteredBookings, setFilteredBookings] = useState([]);
 
-  console.log(filteredBookings);
-
   const handleClick = (item, id, checked) => {
     toggleItem(item);
     if (checked && !checked) {
@@ -62,7 +60,6 @@ function Enquiries() {
     (item) => item.attributes.establishment.data.attributes.title
   );
   const uniqueAccommodations = [...new Set(accommodations)];
-  console.log(uniqueAccommodations);
 
   const formatDate = (value, locale = "en-GB") => {
     return new Date(value).toLocaleDateString(locale);

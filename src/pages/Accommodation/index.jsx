@@ -24,27 +24,26 @@ function Accommodation({ establishments, loading, error }) {
       />
       <OuterContainer>
         <main>
+          <Mobile>
+            <Searchbox establishments={establishments} dropdownStatus={true} />
+          </Mobile>
+          <TabletAndDesktop>
+            <Searchbox
+              establishments={establishments}
+              maxWidth={"none"}
+              width={100}
+            />
+          </TabletAndDesktop>
+          <div className={styles.accommodations}></div>
           {establishments ? (
-            <>
-              <Mobile>
-                <Searchbox dropdownStatus={true} />
-              </Mobile>
-              <TabletAndDesktop>
-                <Searchbox
-                  establishments={establishments}
-                  maxWidth={"none"}
-                  width={100}
-                />
-              </TabletAndDesktop>
-              <div className={styles.accommodations}></div>
-              <Listings
-                type={type}
-                establishments={establishments}
-                loading={loading}
-                error={error}
-                numberOfCards={20}
-              />
-            </>
+            <Listings
+              type={type}
+              establishments={establishments}
+              loading={loading}
+              error={error}
+              MobileAndDesktopNumberOfCards={30}
+              tabletNumberOfCards={30}
+            />
           ) : (
             noEstablishments
           )}

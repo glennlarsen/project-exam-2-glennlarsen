@@ -5,7 +5,7 @@ const StickyBookButton = ({ onClick, price, stars }) => (
   <div className={styles.floatingButton}>
     <div className={styles.floatingButtonText}>
       <span>
-        <span className={styles.floatingButtonPrice}>From {price} NOK </span>
+        <span className={styles.floatingButtonTextPrice}>From {price.toLocaleString().replace(/,/g," ",)} NOK </span>
         per night
       </span>
       <div>{stars}</div>

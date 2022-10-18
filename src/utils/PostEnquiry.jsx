@@ -1,7 +1,7 @@
 import { BASE_URL, BOOKINGS, POPULATE_ALL } from "constants/apiKeys";
 import axios from "axios";
 
-async function PostEnquiry(data, establishmentId) {
+async function PostEnquiry(data, establishmentId, totalPrice, days) {
   const formData = new FormData();
 
   const checkinDate = new Date(data.dates[0]);
@@ -18,8 +18,11 @@ async function PostEnquiry(data, establishmentId) {
     checkout: checkoutDate,
     guests: data.guests,
     establishment: Number(establishmentId),
+    price: Number(totalPrice),
+    days: days,
   };
 
+  console.log(newEnquiry)
   formData.append("data", JSON.stringify(newEnquiry));
 
   const options = {
