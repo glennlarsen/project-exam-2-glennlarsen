@@ -18,7 +18,7 @@ function Card({ establishments, numberOfCards, loading, type }) {
   if (loading) {
     return Array.from(new Array(numberOfCards)).map((skeletonItem, index) => (
       <Box key={index} sx={{ width: "90%" }}>
-        <Skeleton height={250} sx={{ marginTop: "-45px" }} />
+        <Skeleton height={250} sx={{ marginTop: "-45px", borderRadius: "12px" }} />
         <Box
           sx={{
             display: "flex",
@@ -85,7 +85,7 @@ function Card({ establishments, numberOfCards, loading, type }) {
               </div>
               <div className={styles.cardDetails}>
                 <span>
-                  {price.toLocaleString().replace(/,/g, " ")} NOK per day
+                  {price.toLocaleString().replace(/,/g, " ")} NOK per night
                 </span>
                 <div>{numberOfStars}</div>
                 <p>{address}</p>

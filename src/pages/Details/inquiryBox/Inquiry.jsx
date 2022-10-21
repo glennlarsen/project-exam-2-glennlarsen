@@ -91,11 +91,6 @@ const Inquiry = ({ price, tripLink, stars, rating, breakfast, title, id }) => {
 
   // Function that will run when form is submitted
   async function onSubmit(data) {
-    const sendEnquiry = window.confirm(
-      "This will Send the enquiry. Are you sure you want to to that?"
-    );
-
-    if (sendEnquiry) {
       setLoading(true);
       const enquiry = await PostEnquiry(data, id, totalPrice, days);
       if (enquiry.success) {
@@ -107,7 +102,6 @@ const Inquiry = ({ price, tripLink, stars, rating, breakfast, title, id }) => {
         setSubmitted(false);
         setError(true);
       }
-    }
   }
 
   let numberOfStars = [];
